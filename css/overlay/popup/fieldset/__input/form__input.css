@@ -1,0 +1,16 @@
+.form__input {
+  display: block;
+  width: 100%;
+  background-color: #f4f2ff;
+  border: 0 none;
+  border-radius: 5px;
+  margin-bottom: 12px;
+  min-height: 40px;
+  line-height: 1.125;
+  padding: 11px;
+  resize: none;
+}
+
+.form__input:last-child {
+  margin: 0;
+}

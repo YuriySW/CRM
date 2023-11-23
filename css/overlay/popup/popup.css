@@ -1,0 +1,8 @@
+.popup {
+  position: relative;
+  display: flow-root;
+  max-width: 792px;
+  padding: 32px 106px 99px;
+  margin: 0 auto;
+  background-color: #f4f2ff;
+}

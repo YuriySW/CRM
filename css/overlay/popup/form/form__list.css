@@ -1,0 +1,10 @@
+.form__list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(5, 60px);
+  column-gap: 24px;
+  row-gap: 12px;
+  margin: 0;
+  padding: 0;
+  border: none;
+}

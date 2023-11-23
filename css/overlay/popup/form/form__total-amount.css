@@ -1,0 +1,10 @@
+.form__total-amount {
+  color: #6e6893;
+  font-family: 'Inter';
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  float: left;
+  transform: translateY(60px);
+}

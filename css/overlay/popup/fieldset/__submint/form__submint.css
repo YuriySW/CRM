@@ -1,0 +1,29 @@
+.form__submint {
+  max-width: 200px;
+  background: #6d5bd0;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  text-transform: uppercase;
+  color: #fff;
+  padding: 10px 24px;
+  border-radius: 10px;
+  float: right;
+  transform: translateY(60px);
+}
+
+.form__add-img {
+  color: #fff;
+  background: #6d5bd0;
+  border-radius: 10px;
+  font-family: 'Inter';
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  text-transform: uppercase;
+  max-width: 250px;
+
+  padding: 11px 27px;
+}
