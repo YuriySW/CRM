@@ -3,7 +3,7 @@
 const income = +prompt('Введите ваш доход:');
 
 if (isNaN(income)) {
-  console.log('Введите суммув цифрах');
+  console.log('Введите сумму в цифрах');
 } else if (income <= 15000) {
   console.log(`Сумма вашего налога ${income * 0.13}`);
 } else if (income > 15000 && income <= 50000) {
