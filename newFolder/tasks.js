@@ -25,12 +25,43 @@ if (isNaN(scores)) {
 
 const howMuchMOney = +prompt('Сколько денег вы хотите снять?');
 
-if (isNaN(howMuchMOney)) {
-  console.log('Ошибка');
-} else if (howMuchMOney < 100) {
-  console.log('Минимальная купюра в банкомает 100руб!');
+if (isNaN(howMuchMOney) || howMuchMOney < 0) {
+  console.log('Некорректный ввод');
 } else if (howMuchMOney % 100 !== 0) {
   console.log('В банкомате имеются только купюры номиналом: 100, 1000, 5000');
-} else if (howMuchMOney >= 100) {
-  console.log(`Банкомат может выдать сумму: ${howMuchMOney}`);
+}
+
+// tasksHard_1
+{
+  const income = +prompt('Введите ваш доход:');
+
+  if (income <= 15000) {
+    console.log(`Сумма вашего налога ${income * 0.13}`);
+  } else if (income > 15000 && income <= 50000) {
+    console.log(`Сумма вашего налога ${income * 0.2}`);
+  } else {
+    console.log(`Сумма вашего налога ${income * 0.3}`);
+  }
+}
+// tasksHard_2
+
+let income = +prompt('Введите ваш доход:');
+let rest = income;
+let tax = 0;
+
+if (income > 50000) {
+  rest = income - 50000;
+  tax += rest * 0.3;
+  income = income - rest;
+}
+
+if (income > 15000 && income <= 50000) {
+  rest = income - 15000;
+  tax += rest * 0.2;
+  income = income - rest;
+}
+
+if (income <= 15000 && income > 0) {
+  tax += income * 0.13;
+  console.log(`Сумма вашего налога ${tax}`);
 }
