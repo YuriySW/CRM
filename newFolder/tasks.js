@@ -35,14 +35,27 @@ if (isNaN(howMuchMOney) || howMuchMOney < 0) {
 {
   const income = +prompt('Введите ваш доход:');
 
-  if (income <= 15000) {
-    console.log(`Сумма вашего налога ${income * 0.13}`);
-  } else if (income <= 50000) {
-    console.log(`Сумма вашего налога ${income * 0.2}`);
-  } else {
-    console.log(`Сумма вашего налога ${income * 0.3}`);
+  //   if (income <= 15000) {
+  //     console.log(`Сумма вашего налога ${income * 0.13}`);
+  //   } else if (income <= 50000) {
+  //     console.log(`Сумма вашего налога ${income * 0.2}`);
+  //   } else {
+  //     console.log(`Сумма вашего налога ${income * 0.3}`);
+  //   }
+
+  if (income > 0 && income <= 15000) {
+    console.log(`Сумма вашего налога ${income * 0.13} рублей`);
+  }
+
+  if (income > 15000 && income <= 50000) {
+    console.log(`Сумма вашего налога ${income * 0.2} рублей`);
+  }
+
+  if (income > 50000) {
+    console.log(`Сумма вашего налога ${income * 0.3} рублей`);
   }
 }
+
 // tasksHard_2
 
 let income = +prompt('Введите ваш доход:');
@@ -55,7 +68,7 @@ if (income > 50000) {
   income = income - rest;
 }
 
-if (income <= 50000) {
+if (income > 15000) {
   rest = income - 15000;
   tax += rest * 0.2;
   income = income - rest;
@@ -63,5 +76,5 @@ if (income <= 50000) {
 
 if (income > 0) {
   tax += income * 0.13;
-  console.log(`Сумма вашего налога ${tax}`);
+  console.log(`Сумма вашего налога ${tax} рублей`);
 }
