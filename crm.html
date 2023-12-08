@@ -12,22 +12,9 @@
         <button class="popup__close" type="button"><img src="img/icons/close.svg" alt="" /></button>
         <p class="popup__title">Добавить товар</p>
 
-        <div class="popup__title-wrap">
-          <p class="popup__title popup__title-change">Изменить товар</p>
-          <p class="popup__product-id">id: 201910241</p>
-        </div>
-
         <div class="popup__line"></div>
         <form class="popup__form form" action="https://jsonplaceholder.typicode.com/posts" method="POST">
           <fieldset class="form__fieldset">
-            <div class="overlay__error">
-              <button class="popup__close" type="button"><img src="img/icons/close.svg" alt="" /></button>
-              <svg class="overlay__cross" xmlns="http://www.w3.org/2000/svg" width="94" height="94" viewBox="0 0 94 94" fill="none">
-                <path d="M2 2L92 92" stroke="#D80101" stroke-width="3" stroke-linecap="round" />
-                <path d="M2 92L92 2" stroke="#D80101" stroke-width="3" stroke-linecap="round" />
-              </svg>
-              <p class="overlay__error-text">Что-то пошло не так</p>
-            </div>
             <ul class="form__list">
               <li class="form__item form__item-name">
                 <label class="form__label" for="name">Наименования</label>
@@ -60,9 +47,7 @@
                 <label class="form__label" for="price">Цена</label>
                 <input class="form__input" type="number" name="price" id="price" required />
               </li>
-              <li class="form__item form__item-limit-size-img">
-                <p class="form__limit-size-img">Изображение не должно превышать размер 1 Мб</p>
-              </li>
+
               <li class="form__item form__item-but">
                 <button class="form__add-img" type="file">Добавить изображение</button>
               </li>
