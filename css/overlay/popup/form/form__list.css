@@ -8,3 +8,21 @@
   padding: 0;
   border: none;
 }
+
+@media (max-width: 830px) {
+  .form__list {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(10, 60px);
+  }
+}
+
+@media (max-width: 559px) {
+  .overlay {
+    min-height: 539px;
+
+    padding: 0;
+  }
+  .popup {
+    padding: 10px;
+  }
+}
