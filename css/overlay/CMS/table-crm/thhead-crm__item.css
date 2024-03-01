@@ -1,0 +1,27 @@
+.thhead-crm__item {
+  background-color: white;
+  color: rgb(37, 33, 59);
+  font-family: 'Inter';
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 17px;
+  letter-spacing: 11%;
+
+  padding: 15px 0 15px;
+}
+.thhead-crm__item:first-child {
+  padding-left: 15px;
+}
+
+.item_centr {
+  text-align: center;
+}
+
+.thhead-crm__item:last-child {
+  display: flex;
+  justify-content: center;
+}
+
+.thhead-crm__title_pieces {
+  color: rgb(110, 104, 147);
+}

@@ -1,0 +1,21 @@
+.thhead-crm__title {
+  color: rgb(110, 104, 147);
+  font-family: 'Inter';
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 15px;
+  letter-spacing: 1%;
+  /* text-align: left; */
+  text-transform: uppercase;
+  padding: 15px 0;
+}
+
+.thhead-crm__title:nth-child(1),
+.thhead-crm__title:nth-child(2),
+.thhead-crm__title:nth-child(3) {
+  text-align: left;
+}
+
+.thhead-crm__title:first-child {
+  padding-left: 15px;
+}

@@ -1,0 +1,9 @@
+.table-footer {
+  display: grid;
+  grid-template-columns: 185px 71px 62px;
+
+  background: rgb(244, 242, 255);
+  padding: 15px 30px;
+  gap: 50px;
+  justify-content: right;
+}

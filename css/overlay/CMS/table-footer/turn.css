@@ -1,0 +1,8 @@
+.turn svg {
+  width: 6px;
+  height: 10px;
+}
+.turn {
+  display: flex;
+  gap: 50px;
+}

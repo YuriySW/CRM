@@ -6,3 +6,8 @@
   margin: 0 auto;
   background-color: #f4f2ff;
 }
+
+.popup_cms {
+  max-width: 1300px;
+  padding: 79px 100px 110px;
+}

@@ -1,0 +1,6 @@
+.add-product {
+  display: grid;
+  grid-template-columns: 128px 1fr 200px;
+  justify-content: space-between;
+  padding: 15px 20px;
+}

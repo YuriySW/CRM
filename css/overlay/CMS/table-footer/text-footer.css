@@ -1,0 +1,20 @@
+.text-footer {
+  color: rgb(110, 104, 147);
+  font-family: 'Inter';
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 15px;
+  letter-spacing: 5%;
+  text-align: left;
+}
+
+.count:first-child {
+  padding-right: 3px;
+}
+.count:last-child {
+  padding-left: 3px;
+}
+.show-pages {
+  display: flex;
+  align-items: center;
+}

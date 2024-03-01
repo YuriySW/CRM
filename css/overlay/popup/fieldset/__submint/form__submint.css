@@ -8,15 +8,18 @@
   text-transform: uppercase;
   color: #fff;
   padding: 10px 24px;
-  border-radius: 10px;
+  border-radius: 6px;
   float: right;
   transform: translateY(60px);
 }
-
+.form__submint_cms {
+  float: none;
+  transform: none;
+}
 .form__add-img {
   color: #fff;
   background: #6d5bd0;
-  border-radius: 10px;
+  border-radius: 6px;
   font-family: 'Inter';
   font-size: 14px;
   font-style: normal;
