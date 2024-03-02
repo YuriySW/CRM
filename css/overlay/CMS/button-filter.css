@@ -3,3 +3,12 @@ svg {
   width: 108px;
   height: 40px;
 }
+.button-filter,
+svg:hover path {
+  fill: white;
+}
+
+.button-filter,
+svg:hover rect {
+  fill: #6d5bd0;
+}

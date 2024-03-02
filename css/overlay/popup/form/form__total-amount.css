@@ -13,9 +13,3 @@
   float: none;
   transform: none;
 }
-
-@media (max-width: 559px) {
-  .form__total-amount {
-    padding-bottom: 10px;
-  }
-}

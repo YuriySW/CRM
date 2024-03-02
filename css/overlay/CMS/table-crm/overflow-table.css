@@ -1,0 +1,4 @@
+.overflow-table {
+  min-width: 320px;
+  overflow-x: auto;
+}

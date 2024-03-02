@@ -6,7 +6,11 @@
   min-height: 100vh;
   padding: 50px 20px;
   background-color: rgba(0, 0, 0, 0, 3);
+  /* display: none; */
 }
 .overlay-off {
+}
+
+.overlay-table {
   display: none;
 }

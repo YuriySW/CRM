@@ -2,3 +2,7 @@
   height: 5px;
   width: 8px;
 }
+
+.drop-down-list svg:hover path {
+  fill: #cd06ff;
+}

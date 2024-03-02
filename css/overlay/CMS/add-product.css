@@ -1,6 +1,29 @@
 .add-product {
   display: grid;
   grid-template-columns: 128px 1fr 200px;
+
   justify-content: space-between;
   padding: 15px 20px;
+}
+
+@media (max-width: 1015px) {
+  .add-product {
+    grid-template-columns: 200px 1fr;
+    grid-template-rows: 40px 40px;
+    row-gap: 15px;
+  }
+}
+
+@media (max-width: 890px) {
+  .add-product {
+    grid-template-columns: 1fr;
+    grid-template-rows: 40px 40px 40px;
+    row-gap: 15px;
+  }
+}
+
+@media (max-width: 620px) {
+  .add-product {
+    padding: 10px;
+  }
 }

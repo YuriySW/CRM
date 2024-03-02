@@ -5,3 +5,7 @@
   top: 20px;
   background-color: #fff0;
 }
+
+.popup__close:hover {
+  transform: scale(1.2);
+}

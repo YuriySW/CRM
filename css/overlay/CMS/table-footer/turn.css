@@ -1,8 +1,13 @@
 .turn svg {
   width: 6px;
   height: 10px;
+  cursor: pointer;
 }
 .turn {
   display: flex;
   gap: 50px;
+}
+
+.turn svg:hover path {
+  fill: #cd06ff;
 }

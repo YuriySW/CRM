@@ -1,9 +1,11 @@
 .table-footer {
-  display: grid;
-  grid-template-columns: 185px 71px 62px;
-
+  /* display: grid; */
+  /* grid-template-columns: 185px 71px 62px; */
+  /* grid-template-columns: 1fr 1fr 1fr; */
+  display: flex;
   background: rgb(244, 242, 255);
   padding: 15px 30px;
   gap: 50px;
   justify-content: right;
+  overflow-x: auto;
 }

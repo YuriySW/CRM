@@ -5,3 +5,7 @@
   gap: 20px;
   width: 100px;
 }
+
+.button-icons svg:hover path {
+  fill: #cd06ff;
+}

@@ -12,10 +12,15 @@
   float: right;
   transform: translateY(60px);
 }
+.form__submint:hover,
+.form__add-img:hover {
+  background-color: #cd06ff;
+}
 .form__submint_cms {
   float: none;
   transform: none;
 }
+
 .form__add-img {
   color: #fff;
   background: #6d5bd0;
@@ -31,10 +36,20 @@
   padding: 11px 27px;
 }
 
+@media (max-width: 735px) {
+  .form__submint_add-from {
+    margin-bottom: 10px;
+  }
+}
+
 @media (max-width: 559px) {
   .form__submint {
     margin-bottom: 10px;
     margin-right: 10px;
     float: left;
+  }
+  .form__submint_cms {
+    margin: 0;
+    float: none;
   }
 }
