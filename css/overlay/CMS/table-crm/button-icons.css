@@ -2,15 +2,31 @@
   width: 20px;
   height: 20px;
 }
-/* .button-icons svg:hover path {
-  fill: #cd06ff;
-} */
+
 .button-img-close svg:hover path,
 .button-basket svg:hover path,
-.button-img svg:hover path {
+.button-img svg:hover path,
+.button-img-close svg:focus path,
+.button-basket svg:focus path,
+.button-img svg:focus path {
+  transition: 0.4s;
   fill: #cd06ff;
 }
 
-.button-edit:hover svg path {
+.button-edit:hover svg path,
+.button-edit:focus svg path {
+  transition: 0.4s;
   stroke: #cd06ff;
+}
+
+.button-img-close svg:active path,
+.button-basket svg:active path,
+.button-img svg:active path {
+  transition: 0.4s;
+  fill: #351db8;
+}
+
+.button-edit:active svg path {
+  transition: 0.4s;
+  stroke: #351db8;
 }

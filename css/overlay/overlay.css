@@ -7,11 +7,7 @@
   padding: 50px 20px;
   background-color: rgba(0, 0, 0, 0, 3);
   z-index: 1;
-  /* display: none; */
-}
-
-.overlay-table {
-  /* display: none; */
+  display: none;
 }
 
 @media (max-width: 660px) {

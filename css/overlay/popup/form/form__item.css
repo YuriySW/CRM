@@ -1,4 +1,11 @@
-.form__item {
+.form__label {
+  color: rgb(110, 104, 147);
+  font-family: 'Inter';
+  font-size: 12px;
+  font-weight: 600px;
+  line-height: 15px;
+  letter-spacing: 5%;
+  text-transform: uppercase;
 }
 
 .form__item-description {

@@ -5,10 +5,24 @@ svg {
 }
 .button-filter,
 svg:hover path {
+  transition: 0.4s;
   fill: white;
 }
 
 .button-filter,
 svg:hover rect {
+  transition: 0.4s;
   fill: #6d5bd0;
+}
+
+.button-filter,
+svg:active rect {
+  transition: 0.4s;
+  fill: #351db8;
+}
+
+.button-filter,
+svg:focus rect {
+  transition: 0.4s;
+  fill: #351db8;
 }

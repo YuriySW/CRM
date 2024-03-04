@@ -2,10 +2,9 @@
   color: rgb(110, 104, 147);
   font-family: 'Inter';
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 600px;
   line-height: 15px;
-  letter-spacing: 1%;
-  /* text-align: left; */
+  letter-spacing: 5%;
   text-transform: uppercase;
   padding: 15px 0;
 }

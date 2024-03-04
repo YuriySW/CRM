@@ -1,9 +1,10 @@
 .form__submint {
   max-width: 200px;
   background: #6d5bd0;
+  font-family: 'Inter';
   font-size: 16px;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 600px;
   line-height: normal;
   text-transform: uppercase;
   color: #fff;
@@ -13,9 +14,18 @@
   transform: translateY(60px);
 }
 .form__submint:hover,
-.form__add-img:hover {
-  background-color: #cd06ff;
+.form__add-img:hover,
+.form__add-img:focus,
+.form__submint:focus {
+  background-color: #351db8;
+  transition: 0.4s;
 }
+.form__submint:active,
+.form__add-img:active {
+  background-color: #190e58;
+  transition: 0.4s;
+}
+
 .form__submint_cms {
   float: none;
   transform: none;
@@ -28,7 +38,7 @@
   font-family: 'Inter';
   font-size: 14px;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 600px;
   line-height: normal;
   text-transform: uppercase;
   max-width: 250px;

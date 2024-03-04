@@ -10,6 +10,81 @@
     <script defer src="index.js"></script>
   </head>
   <body>
+    <div class="overlay">
+      <div class="popup">
+        <button class="popup__close" type="button"><img src="img/icons/close.svg" alt="" /></button>
+        <p class="popup__title">Добавить товар</p>
+
+        <div class="popup__line"></div>
+        <form
+          class="popup__form form"
+          action="https://jsonplaceholder.typicode.com/posts"
+          method="POST"
+        >
+          <fieldset class="form__fieldset form__list">
+            <div class="form__item form__item-name">
+              <label class="form__label" for="name">Наименования</label>
+              <input class="form__input" type="text" name="name" id="name" required />
+            </div>
+            <div class="form__item form__item-category">
+              <label class="form__label" for="category">Категория</label>
+              <input class="form__input" type="text" name="category" id="category" required />
+            </div>
+            <div class="form__item form__item-units">
+              <label class="form__label" for="units">Единицы измерения</label>
+              <input class="form__input" type="text" name="units" id="units" required />
+            </div>
+            <div class="form__item form__item-discount">
+              <label class="form__label" for="discount">Дисконт</label>
+              <div class="form__optional-input">
+                <input
+                  class="checkbox form__checkbox"
+                  type="checkbox"
+                  aria-label="Добавить скидку"
+                  required
+                />
+                <input
+                  class="form__input"
+                  type="text"
+                  name="discount"
+                  id="discount"
+                  disabled
+                  required
+                />
+              </div>
+            </div>
+            <div class="form__item form__item-description">
+              <label class="form__label" for="description">Описание</label>
+              <textarea
+                class="form__input"
+                name="description"
+                id="description"
+                rows="5"
+                required
+              ></textarea>
+            </div>
+            <div class="form__item form__item-count">
+              <label class="form__label" for="count">Колличество</label>
+              <input class="form__input" type="number" name="count" id="count" required />
+            </div>
+            <div class="form__item form__item-price">
+              <label class="form__label" for="price">Цена</label>
+              <input class="form__input" type="number" name="price" id="price" required />
+            </div>
+
+            <div class="form__item form__item-but">
+              <button class="form__add-img" type="button">Добавить изображение</button>
+            </div>
+          </fieldset>
+
+          <button class="form__submint form__submint_add-from" type="submit">Добавить товар</button>
+          <p class="total-amount">
+            Итоговая стоимость:
+            <span class="amount-money amount-money_add-from">$ 900.00</span>
+          </p>
+        </form>
+      </div>
+    </div>
     <div class="overlay-table">
       <div class="popup popup_cms">
         <div class="title-wrap">
@@ -76,13 +151,7 @@
               </button>
             </form>
 
-            <button
-              onclick="window.location.href = 'crm.html';"
-              class="form__submint form__submint_cms"
-              type="submit"
-            >
-              Добавить товар
-            </button>
+            <button class="form__submint form__submint_cms" type="submit">Добавить товар</button>
           </div>
           <div class="overflow-table">
             <table class="table-crm">
