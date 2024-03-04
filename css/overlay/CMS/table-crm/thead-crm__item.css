@@ -1,4 +1,4 @@
-.thhead-crm__item {
+.thead-crm__item {
   background-color: white;
   color: rgb(37, 33, 59);
   font-family: 'Inter';
@@ -9,19 +9,19 @@
 
   padding: 15px 0 15px;
 }
-.thhead-crm__item:first-child {
+.thead-crm__item:first-child {
   padding-left: 15px;
 }
 
-.item_centr {
+.thead-crm__item_centr {
   text-align: center;
 }
 
-.thhead-crm__item:last-child {
+.thead-crm__item:last-child {
   display: flex;
   justify-content: center;
 }
 
-.thhead-crm__title_pieces {
+.thead-crm__item_pieces {
   color: rgb(110, 104, 147);
 }

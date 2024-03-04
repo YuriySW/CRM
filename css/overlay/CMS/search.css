@@ -19,6 +19,7 @@
 .search-window:focus {
   outline: 1px solid #6d5bd0;
 }
+
 .search-input {
   width: 100%;
   height: 40px;
@@ -39,4 +40,8 @@
   left: 10px;
   top: 10px;
   cursor: pointer;
+}
+
+.search-button:hover path {
+  fill: #cd06ff;
 }

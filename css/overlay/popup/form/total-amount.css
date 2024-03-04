@@ -1,4 +1,4 @@
-.form__total-amount {
+.total-amount {
   color: #6e6893;
   font-family: 'Inter';
   font-size: 14px;
@@ -9,7 +9,7 @@
   transform: translateY(60px);
 }
 
-.form__total-amount_cms {
+.total-amount_cms {
   float: none;
   transform: none;
 }

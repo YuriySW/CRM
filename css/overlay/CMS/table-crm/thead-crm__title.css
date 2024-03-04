@@ -1,4 +1,4 @@
-.thhead-crm__title {
+.thead-crm__title {
   color: rgb(110, 104, 147);
   font-family: 'Inter';
   font-size: 12px;
@@ -10,12 +10,12 @@
   padding: 15px 0;
 }
 
-.thhead-crm__title:nth-child(1),
-.thhead-crm__title:nth-child(2),
-.thhead-crm__title:nth-child(3) {
+.thead-crm__title:nth-child(1),
+.thead-crm__title:nth-child(2),
+.thead-crm__title:nth-child(3) {
   text-align: left;
 }
 
-.thhead-crm__title:first-child {
+.thead-crm__title:first-child {
   padding-left: 15px;
 }

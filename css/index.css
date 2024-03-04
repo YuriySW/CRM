@@ -12,8 +12,8 @@
 @import 'overlay/popup/form/optional-input/__checkbox/form__checkbox.css';
 @import 'overlay/popup/form/optional-input/form__optional-input.css';
 @import 'overlay/popup/fieldset/__submint/form__submint.css';
-@import 'overlay/popup/form/form__total-amount.css';
-@import 'overlay/popup/form/form__amount-money.css';
+@import 'overlay/popup/form/total-amount.css';
+@import 'overlay/popup/form/amount-money.css';
 @import 'overlay/popup/form/form__list.css';
 @import 'overlay/popup/form/form__item.css';
 @import 'overlay/CMS/title-wrap.css';
@@ -22,9 +22,9 @@
 @import 'overlay/CMS/button-filter.css';
 @import 'overlay/CMS/table-crm/table-crm.css';
 @import 'overlay/CMS/table-crm/button-icons.css';
-@import 'overlay/CMS/table-crm/thhead-crm__item.css';
+@import 'overlay/CMS/table-crm/thead-crm__item.css';
 @import 'overlay/CMS/table-crm/thead-wrap.css';
-@import 'overlay/CMS/table-crm/thhead-crm__title.css';
+@import 'overlay/CMS/table-crm/thead-crm__title.css';
 @import 'overlay/CMS/table-crm/set-buttons-wrap.css';
 @import 'overlay/CMS/table-footer/table-footer.css';
 @import 'overlay/CMS/table-footer/text-footer.css';

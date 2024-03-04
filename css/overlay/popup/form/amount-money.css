@@ -1,4 +1,4 @@
-.form__amount-money {
+.amount-money {
   color: #6d5bd0;
   font-family: 'Inter';
   font-size: 18px;
@@ -8,7 +8,7 @@
 }
 
 @media (max-width: 755px) {
-  .form__amount-money_add-from {
+  .amount-money_add-from {
     margin-right: 20px;
   }
 }

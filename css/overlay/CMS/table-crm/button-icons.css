@@ -2,3 +2,15 @@
   width: 20px;
   height: 20px;
 }
+/* .button-icons svg:hover path {
+  fill: #cd06ff;
+} */
+.button-img-close svg:hover path,
+.button-basket svg:hover path,
+.button-img svg:hover path {
+  fill: #cd06ff;
+}
+
+.button-edit:hover svg path {
+  stroke: #cd06ff;
+}

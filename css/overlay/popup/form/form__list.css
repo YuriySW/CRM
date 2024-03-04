@@ -15,14 +15,3 @@
     grid-template-rows: repeat(10, 60px);
   }
 }
-
-@media (max-width: 559px) {
-  .overlay {
-    min-height: 539px;
-
-    padding: 0;
-  }
-  .popup {
-    padding: 10px;
-  }
-}
