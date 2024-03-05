@@ -8,6 +8,11 @@
   gap: 50px;
 }
 
+.arrow-left,
+.arrow-right {
+  background: rgb(244, 242, 255);
+}
+
 .turn svg:hover path {
   fill: #cd06ff;
 }

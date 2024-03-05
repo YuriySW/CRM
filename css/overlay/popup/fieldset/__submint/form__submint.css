@@ -42,7 +42,7 @@
   line-height: normal;
   text-transform: uppercase;
   max-width: 250px;
-
+  cursor: pointer;
   padding: 11px 27px;
 }
 

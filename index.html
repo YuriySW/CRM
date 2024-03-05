@@ -71,13 +71,14 @@
               <label class="form__label" for="price">Цена</label>
               <input class="form__input" type="number" name="price" id="price" required />
             </div>
-
             <div class="form__item form__item-but">
-              <button class="form__add-img" type="button">Добавить изображение</button>
+              <input id="file" type="file" name="file" style="display: none" />
+              <label class="form__add-img" for="file">Добавить изображение</label>
             </div>
           </fieldset>
 
           <button class="form__submint form__submint_add-from" type="submit">Добавить товар</button>
+
           <p class="total-amount">
             Итоговая стоимость:
             <span class="amount-money amount-money_add-from">$ 900.00</span>
