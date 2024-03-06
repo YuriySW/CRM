@@ -14,7 +14,7 @@
 @import 'overlay/popup/fieldset/__submint/form__submint.css';
 @import 'overlay/popup/form/total-amount.css';
 @import 'overlay/popup/form/amount-money.css';
-@import 'overlay/popup/form/form__list.css';
+@import 'overlay/popup/fieldset/form__fieldset.css';
 @import 'overlay/popup/form/form__item.css';
 @import 'overlay/CMS/title-wrap.css';
 @import 'overlay/CMS/add-product.css';

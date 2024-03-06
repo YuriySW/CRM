@@ -16,3 +16,11 @@
 .turn svg:hover path {
   fill: #cd06ff;
 }
+
+@media (max-width: 520px) {
+  .turn {
+    grid-column: 2/3;
+    grid-row: 2/3;
+    justify-content: right;
+  }
+}

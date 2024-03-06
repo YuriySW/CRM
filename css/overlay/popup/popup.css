@@ -10,4 +10,23 @@
 .popup_cms {
   max-width: 1300px;
   padding: 79px 100px 110px;
+  /* padding-top: 79px; */
+}
+
+@media (max-width: 820px) {
+  .popup {
+    padding: 30px;
+  }
+}
+
+@media (max-width: 660px) {
+  .popup_cms {
+    min-height: 320px;
+
+    padding: 10px;
+  }
+
+  .popup_crm {
+    padding: 10px;
+  }
 }
