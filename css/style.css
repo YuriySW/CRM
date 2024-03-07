@@ -33,6 +33,19 @@ html {
   font-family: 'Inter', Helvetica, sans-serif;
 }
 
+.container {
+  max-width: 1160px;
+  padding: 79px 30px 30px;
+  margin: 0 auto;
+}
+
+@media (max-width: 660px) {
+  .container {
+    min-height: 400px;
+    padding: 10px;
+  }
+}
+
 h1,
 h2,
 h3,
