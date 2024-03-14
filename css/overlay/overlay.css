@@ -10,6 +10,10 @@
   display: none;
 }
 
+.overlay_flex {
+  display: flex;
+}
+
 @media (max-width: 660px) {
   .overlay {
     min-height: 539px;
