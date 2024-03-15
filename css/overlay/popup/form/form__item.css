@@ -8,7 +8,15 @@
   text-transform: uppercase;
 }
 
-.form__item-description {
+.form__input_price {
+  margin-bottom: 32px;
+}
+
+.form__item {
+  display: grid;
+}
+
+/* .form__item-description {
   grid-column: 2/3;
   grid-row: 1/3;
 }
@@ -55,4 +63,4 @@
     grid-column: 1/2;
     grid-row: 9/10;
   }
-}
+} */

@@ -69,6 +69,10 @@
     margin-right: 0;
     float: none;
     transform: none;
+    margin-bottom: 10px;
+  }
+  .form__add-img {
+    margin-bottom: 20px;
   }
 }
 
