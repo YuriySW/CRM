@@ -11,7 +11,11 @@ const theadCrmItemPieces = document.querySelector('.thead-crm__item_pieces');
 const thead = document.querySelector('.thead-crm');
 const trTitleCrm = document.querySelector('.tr-title-crm');
 const tableCrm = document.querySelector('.table-crm');
-const buttonsCms = document.querySelectorAll('.set-buttons-wrap')[1];
+const addProductBtn = document.querySelector('.form__submint_cms');
+const overlay = document.querySelector('.overlay');
+const overlayShow = document.querySelector('.overlay_show');
+const overlayCloseBtn = document.querySelector('.popup__close');
+const popup = document.querySelector('.popup');
 
 const product = [
   {
@@ -20,7 +24,7 @@ const product = [
     category: 'mobile-phone',
     units: 'шт',
     count: 3,
-    price: '$27000',
+    price: 27000,
     total: '$500',
   },
   {
@@ -28,8 +32,8 @@ const product = [
     title: 'Радиоуправляемый автомобиль Cheetan',
     category: 'toys',
     units: 'шт',
-    price: '$4000',
     count: 1,
+    price: 4000,
     total: '$500',
   },
   {
@@ -38,7 +42,7 @@ const product = [
     category: 'tv-box',
     units: 'шт',
     count: 4,
-    price: '12400',
+    price: 12400,
     total: '$500',
   },
   {
@@ -46,8 +50,8 @@ const product = [
     title: 'Витая пара PROConnect 01-0043-3-25',
     category: 'cables',
     units: 'v',
-    price: '$22',
     count: 420,
+    price: 22,
     total: '$500',
   },
 ];
@@ -55,7 +59,7 @@ const product = [
 const createRow = ({id, title, category, units, count, price, total}) => {
   const trElement = document.createElement('tr');
   const buttonImg = 'button-img';
-
+  total = price * count;
   trElement.innerHTML = `
   <tr>
   <td class="thead-crm__item">${id}</td>
@@ -63,7 +67,7 @@ const createRow = ({id, title, category, units, count, price, total}) => {
   <td class="thead-crm__item">${category}</td>
   <td class="thead-crm__item thead-crm__item_pieces thead-crm__item_centr">${units}</td>
   <td class="thead-crm__item thead-crm__item_centr">${count}</td>
-  <td class="thead-crm__item thead-crm__item_centr">${price}</td>
+  <td class="thead-crm__item thead-crm__item_centr">$${price}</td>
   <td class="thead-crm__item thead-crm__item_centr">$${total}</td>
   <td class="thead-crm__item">
     <div class="set-buttons-wrap">
@@ -146,5 +150,21 @@ const renderGoods = (arr) => {
 
   return tableCrm;
 };
+
+addProductBtn.addEventListener('click', () => {
+  overlay.style.display = 'block';
+});
+
+overlayCloseBtn.addEventListener('click', () => {
+  overlay.style.display = 'none';
+});
+
+overlay.addEventListener('click', () => {
+  overlay.style.display = 'none';
+});
+
+popup.addEventListener('click', (event) => {
+  event.stopPropagation();
+});
 
 console.log(renderGoods(product));
