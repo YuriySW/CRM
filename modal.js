@@ -152,15 +152,15 @@ const renderGoods = (arr) => {
 };
 
 addProductBtn.addEventListener('click', () => {
-  overlay.style.display = 'block';
+  overlayShow.style.display = 'block';
 });
 
 overlayCloseBtn.addEventListener('click', () => {
-  overlay.style.display = 'none';
+  overlayShow.style.display = 'none';
 });
 
 overlay.addEventListener('click', () => {
-  overlay.style.display = 'none';
+  overlayShow.style.display = 'none';
 });
 
 popup.addEventListener('click', (event) => {
