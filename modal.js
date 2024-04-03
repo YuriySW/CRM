@@ -16,6 +16,11 @@ const overlay = document.querySelector('.overlay');
 const overlayShow = document.querySelector('.overlay_show');
 const overlayCloseBtn = document.querySelector('.popup__close');
 const popup = document.querySelector('.popup');
+const iconBasket = document.querySelector('.button-basket');
+const trElements = document.querySelectorAll('tr');
+trElements.forEach((tr) => {
+  tr.classList.add('product-tr');
+});
 
 const product = [
   {
@@ -58,6 +63,8 @@ const product = [
 
 const createRow = ({id, title, category, units, count, price, total}) => {
   const trElement = document.createElement('tr');
+  trElement.classList.add('product-tr');
+
   const buttonImg = 'button-img';
   total = price * count;
   trElement.innerHTML = `
@@ -151,20 +158,33 @@ const renderGoods = (arr) => {
   return tableCrm;
 };
 
+overlay.addEventListener('click', (e) => {
+  const target = e.target;
+  if (target === overlay || target === target.closest('.popup__close-img')) {
+    overlayShow.style.display = 'none';
+  }
+});
+
 addProductBtn.addEventListener('click', () => {
   overlayShow.style.display = 'block';
 });
 
-overlayCloseBtn.addEventListener('click', () => {
-  overlayShow.style.display = 'none';
+thead.addEventListener('click', (e) => {
+  const target = e.target;
+
+  if (target.closest('.button-basket')) {
+    const prodElement = target.closest('.product-tr');
+    prodElement.remove();
+
+    const deletedId = +prodElement.querySelector('.thead-crm__item').textContent;
+
+    const index = product.findIndex((item) => item.id === deletedId);
+    if (index !== -1) {
+      product.splice(index, 1);
+    }
+
+    console.log(product);
+  }
 });
 
-overlay.addEventListener('click', () => {
-  overlayShow.style.display = 'none';
-});
-
-popup.addEventListener('click', (event) => {
-  event.stopPropagation();
-});
-
-console.log(renderGoods(product));
+renderGoods(product);
