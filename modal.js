@@ -187,4 +187,14 @@ thead.addEventListener('click', (e) => {
   }
 });
 
+const clearTr = (e) => {
+  const trForDelet = document.querySelectorAll('tr');
+  trForDelet.forEach((tr, index) => {
+    if (index > 0) {
+      tr.remove();
+    }
+  });
+};
+
+clearTr();
 renderGoods(product);
