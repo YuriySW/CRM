@@ -1,7 +1,7 @@
 'use strict';
 
 const titleModal = document.querySelector('.popup__title');
-const formModal = document.querySelector('.form');
+const formModal = document.querySelector('.popup__form');
 const checkboxDiscount = document.querySelector('.form__checkbox');
 const discount = document.querySelector('.discount');
 const totalAmount = document.querySelector('.amount-money');
@@ -17,6 +17,9 @@ const overlayShow = document.querySelector('.overlay_show');
 const overlayCloseBtn = document.querySelector('.popup__close');
 const popup = document.querySelector('.popup');
 const iconBasket = document.querySelector('.button-basket');
+const productAddTable = document.querySelector('.form__submit_add-from');
+let amountMoneyAddFrom = document.querySelector('.amount-money_add-from');
+let amountMoneyCms = document.querySelector('.amount-money_cms');
 const trElements = document.querySelectorAll('tr');
 trElements.forEach((tr) => {
   tr.classList.add('product-tr');
@@ -148,13 +151,24 @@ const createRow = ({id, title, category, units, count, price, total}) => {
     </div>
   </td>
 </tr>`;
+
   return trElement;
+};
+
+const totalCoast = () => {
+  const allRows = document.querySelectorAll('.thead-crm__item_centr:nth-child(7)');
+  let totalSum = 0;
+  allRows.forEach((row) => {
+    totalSum += +row.textContent.slice(1);
+  });
+  return (amountMoneyCms.textContent = `$${totalSum}`);
 };
 
 const renderGoods = (arr) => {
   const rows = arr.map(createRow);
   rows.map((trElement) => thead.append(trElement));
 
+  totalCoast();
   return tableCrm;
 };
 
@@ -184,10 +198,11 @@ thead.addEventListener('click', (e) => {
     }
 
     console.log(product);
+    totalCoast();
   }
 });
 
-const clearTr = (e) => {
+const clearTr = () => {
   const trForDelet = document.querySelectorAll('tr');
   trForDelet.forEach((tr, index) => {
     if (index > 0) {
@@ -198,3 +213,41 @@ const clearTr = (e) => {
 
 clearTr();
 renderGoods(product);
+
+checkboxDiscount.addEventListener('change', (e) => {
+  if (e.target.checked) {
+    discount.disabled = false;
+  } else {
+    discount.disabled = true;
+    discount.value = '';
+  }
+});
+
+formModal.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const formData = new FormData(e.target);
+  const formProduct = {};
+
+  formProduct.id = 777777777;
+  formProduct.title = formData.get('name');
+  formProduct.category = formData.get('category');
+  formProduct.units = formData.get('units');
+  formProduct.description = formData.get('description');
+  formProduct.count = formData.get('count');
+  formProduct.price = formData.get('price');
+
+  console.log([formProduct]);
+  renderGoods([formProduct]);
+  formModal.reset();
+});
+
+const priceInput = formModal.querySelector('#price');
+const countProduct = formModal.querySelector('#count');
+
+priceInput.addEventListener('focus', () => {
+  if (priceInput.value && countProduct.value) {
+    const total = priceInput.value * countProduct.value;
+    amountMoneyAddFrom.textContent = `$ ${total}`;
+  }
+});
