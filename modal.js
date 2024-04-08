@@ -67,7 +67,6 @@ const product = [
 const createRow = ({id, title, category, units, count, price, total}) => {
   const trElement = document.createElement('tr');
   trElement.classList.add('product-tr');
-
   const buttonImg = 'button-img';
   total = price * count;
   trElement.innerHTML = `
