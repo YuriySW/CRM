@@ -239,14 +239,23 @@ formModal.addEventListener('submit', (e) => {
   console.log([formProduct]);
   renderGoods([formProduct]);
   formModal.reset();
+  discount.disabled = true;
+  overlayShow.style.display = 'none';
 });
 
 const priceInput = formModal.querySelector('#price');
 const countProduct = formModal.querySelector('#count');
 
-priceInput.addEventListener('focus', () => {
+const calculateTotal = () => {
   if (priceInput.value && countProduct.value) {
-    const total = priceInput.value * countProduct.value;
+    let total = priceInput.value * countProduct.value;
+    if (+discount.value) {
+      total -= +discount.value;
+    }
     amountMoneyAddFrom.textContent = `$ ${total}`;
   }
-});
+};
+
+priceInput.addEventListener('focus', calculateTotal);
+countProduct.addEventListener('focus', calculateTotal);
+discount.addEventListener('focus', calculateTotal);

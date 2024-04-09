@@ -14,3 +14,7 @@
 .form__input:last-child {
   margin: 0;
 }
+
+.form__input:disabled {
+  background-color: #f8f7f9;
+}
