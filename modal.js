@@ -25,6 +25,9 @@ trElements.forEach((tr) => {
   tr.classList.add('product-tr');
 });
 
+discount.removeAttribute('required');
+checkboxDiscount.removeAttribute('required');
+
 const product = [
   {
     id: 253842678,
@@ -182,7 +185,7 @@ addProductBtn.addEventListener('click', () => {
   overlayShow.style.display = 'block';
 });
 
-thead.addEventListener('click', (e) => {
+const deleteTr = (e) => {
   const target = e.target;
 
   if (target.closest('.button-basket')) {
@@ -199,7 +202,7 @@ thead.addEventListener('click', (e) => {
     console.log(product);
     totalCoast();
   }
-});
+};
 
 const clearTr = () => {
   const trForDelet = document.querySelectorAll('tr');
@@ -228,7 +231,17 @@ formModal.addEventListener('submit', (e) => {
   const formData = new FormData(e.target);
   const formProduct = {};
 
-  formProduct.id = '';
+  const generateRandomNumbers = () => {
+    let numbers = '';
+    for (let i = 0; i < 9; i++) {
+      numbers += Math.floor(Math.random() * 10) + 1;
+    }
+    return numbers;
+  };
+
+  const randomNumbers = generateRandomNumbers();
+
+  formProduct.id = +randomNumbers;
   formProduct.title = formData.get('name');
   formProduct.category = formData.get('category');
   formProduct.units = formData.get('units');
@@ -237,13 +250,18 @@ formModal.addEventListener('submit', (e) => {
   formProduct.price = formData.get('price');
 
   console.log([formProduct]);
+
   renderGoods([formProduct]);
   product.push(formProduct);
   console.log(product);
+  discount.removeAttribute('required');
+
   formModal.reset();
   discount.disabled = true;
   overlayShow.style.display = 'none';
 });
+
+thead.addEventListener('click', deleteTr);
 
 const priceInput = formModal.querySelector('#price');
 const countProduct = formModal.querySelector('#count');
