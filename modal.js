@@ -228,7 +228,7 @@ formModal.addEventListener('submit', (e) => {
   const formData = new FormData(e.target);
   const formProduct = {};
 
-  formProduct.id = 777777777;
+  formProduct.id = '';
   formProduct.title = formData.get('name');
   formProduct.category = formData.get('category');
   formProduct.units = formData.get('units');
@@ -238,6 +238,8 @@ formModal.addEventListener('submit', (e) => {
 
   console.log([formProduct]);
   renderGoods([formProduct]);
+  product.push(formProduct);
+  console.log(product);
   formModal.reset();
   discount.disabled = true;
   overlayShow.style.display = 'none';
@@ -250,12 +252,12 @@ const calculateTotal = () => {
   if (priceInput.value && countProduct.value) {
     let total = priceInput.value * countProduct.value;
     if (+discount.value) {
-      total -= +discount.value;
+      total -= (total / 100) * +discount.value;
     }
     amountMoneyAddFrom.textContent = `$ ${total}`;
   }
 };
 
-priceInput.addEventListener('focus', calculateTotal);
-countProduct.addEventListener('focus', calculateTotal);
-discount.addEventListener('focus', calculateTotal);
+priceInput.addEventListener('input', calculateTotal);
+countProduct.addEventListener('input', calculateTotal);
+discount.addEventListener('input', calculateTotal);
