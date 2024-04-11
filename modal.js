@@ -222,6 +222,7 @@ checkboxDiscount.addEventListener('change', (e) => {
   } else {
     discount.disabled = true;
     discount.value = '';
+    calculateTotal();
   }
 });
 
@@ -257,6 +258,7 @@ formModal.addEventListener('submit', (e) => {
   discount.removeAttribute('required');
 
   formModal.reset();
+  amountMoneyAddFrom.textContent = 0;
   discount.disabled = true;
   overlayShow.style.display = 'none';
 });
@@ -272,6 +274,7 @@ const calculateTotal = () => {
     if (+discount.value) {
       total -= (total / 100) * +discount.value;
     }
+
     amountMoneyAddFrom.textContent = `$ ${total}`;
   }
 };
