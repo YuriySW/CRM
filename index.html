@@ -7,11 +7,15 @@
     <link rel="preload" href="fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="fonts/Inter-Bold.woff2" as="font" type="font/woff2" crossorigin />
     <title>CMS</title>
-    <script defer src="index.js"></script>
-    <script defer src="modal.js"></script>
+    <script type="module" src="script/script.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        window.crmInit();
+      });
+    </script>
   </head>
   <body class="body">
-    <div class="container">
+    <div class="popup container">
       <div class="title-wrap">
         <h1 class="popup__title popup__title_cms">CMS</h1>
         <p class="total-amount total-amount_cms">
@@ -76,7 +80,7 @@
             </button>
           </form>
 
-          <button class="form__submint form__submint_cms" type="button">Добавить товар</button>
+          <button class="form__submit form__submit_cms" type="button">Добавить товар</button>
         </div>
         <div class="overflow-table">
           <table class="table-crm">
@@ -1031,7 +1035,7 @@
             </div>
           </fieldset>
 
-          <button class="form__submint form__submit_add-from" type="submit">Добавить товар</button>
+          <button class="form__submit form__submit_add-from" type="submit">Добавить товар</button>
 
           <p class="total-amount">
             Итоговая стоимость:
