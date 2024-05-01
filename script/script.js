@@ -1,5 +1,5 @@
 import {checkboxDiscount} from './modules/identifier.js';
-import {closeModal, formSubmit, rebate, clearTr} from './modules/control.js';
+import {closeModal, formSubmit, clearTr, discountRebate} from './modules/control.js';
 import {renderGoods, calculateTotal} from './modules/render.js';
 
 export const product = [
@@ -46,7 +46,7 @@ export const product = [
     closeModal();
     clearTr();
     renderGoods(product);
-    rebate();
+    discountRebate();
     formSubmit();
     calculateTotal();
   };

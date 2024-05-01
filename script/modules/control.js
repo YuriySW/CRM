@@ -37,7 +37,7 @@ export const closeModal = () => {
   });
 };
 
-export const rebate = () => {
+export const discountRebate = () => {
   checkboxDiscount.addEventListener('change', (e) => {
     if (e.target.checked) {
       discount.disabled = false;
