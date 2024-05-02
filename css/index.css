@@ -11,7 +11,8 @@
 @import 'overlay/popup/fieldset/__input/form__input.css';
 @import 'overlay/popup/form/optional-input/__checkbox/form__checkbox.css';
 @import 'overlay/popup/form/optional-input/form__optional-input.css';
-@import 'overlay/popup/fieldset/__submint/form__submint.css';
+
+@import 'overlay/popup/fieldset/__submit/form__submit.css';
 @import 'overlay/popup/form/total-amount.css';
 @import 'overlay/popup/form/amount-money.css';
 @import 'overlay/popup/fieldset/form__fieldset.css';

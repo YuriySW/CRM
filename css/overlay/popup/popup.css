@@ -1,4 +1,4 @@
-.popup {
+.popup_crm {
   position: relative;
   display: flow-root;
   max-width: 792px;
@@ -8,7 +8,7 @@
 }
 
 @media (max-width: 820px) {
-  .popup {
+  .popup_crm {
     padding: 30px;
   }
 }
