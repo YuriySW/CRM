@@ -7,7 +7,7 @@ import {
   amountMoneyAddFrom,
 } from './identifier.js';
 import {renderGoods, totalCoast, calculateTotal} from './render.js';
-import {product} from '../script.js';
+import {product} from './data.js';
 
 export const deleteTr = (e) => {
   const target = e.target;
