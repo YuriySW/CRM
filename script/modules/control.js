@@ -6,6 +6,7 @@ import {
   overlayShow,
   amountMoneyAddFrom,
 } from './identifier.js';
+
 import {renderGoods, totalCoast, calculateTotal} from './render.js';
 import {product} from './data.js';
 
