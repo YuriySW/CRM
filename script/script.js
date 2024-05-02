@@ -15,3 +15,4 @@ import {renderGoods, calculateTotal} from './modules/render.js';
 
   window.crmInit = init;
 }
+//test
