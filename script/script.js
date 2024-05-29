@@ -13,5 +13,5 @@ import {renderGoods, calculateTotal} from './modules/render.js';
     calculateTotal();
   };
 
-  window.crmInit = init;
+  window.crmInit = init();
 }
