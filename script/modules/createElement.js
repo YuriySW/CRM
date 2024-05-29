@@ -85,5 +85,26 @@ export const createRow = ({id, title, category, units, count, price, total}) => 
    </td>
  </tr>`;
 
+  const button = trElement.querySelector(`.${buttonImg}`);
+  button.setAttribute(
+    'data-pic',
+    'https://images.wallpaperscraft.ru/image/single/dvoichnyj_kod_kod_tsifry_147523_1280x720.jpg'
+  );
+
+  button.addEventListener('click', () => {
+    const url = button.getAttribute('data-pic');
+
+    const width = 600;
+    const height = 600;
+
+    const screenWidth = window.screen.width;
+    const screenHeight = window.screen.height;
+
+    const left = screenWidth / 2 - width / 2;
+    const top = screenHeight / 2 - height / 2;
+
+    window.open(url, '', `width=${width},height=${height},top=${top},left=${left}`);
+  });
+
   return trElement;
 };
