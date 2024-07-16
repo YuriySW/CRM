@@ -1,4 +1,4 @@
-.popup__close {
+.popup-close {
   height: 20px;
   position: absolute;
   right: 30px;
@@ -6,6 +6,6 @@
   background-color: #fff0;
 }
 
-.popup__close:hover {
+.popup-close:hover {
   transform: scale(1.2);
 }

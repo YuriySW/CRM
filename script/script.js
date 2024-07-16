@@ -1,13 +1,17 @@
 import {product} from './modules/data.js';
 import {checkboxDiscount} from './modules/identifier.js';
-import {closeModal, formSubmit, clearTr, discountRebate} from './modules/control.js';
+import {closeModal, formSubmit, clearTr, discountRebate, closeError} from './modules/control.js';
 import {renderGoods, calculateTotal} from './modules/render.js';
+import './modules/api.js';
+import {loadGoods} from './modules/api.js';
 
 {
-  const init = () => {
+  const init = async () => {
     closeModal();
+    closeError();
     clearTr();
-    renderGoods(product);
+    const goods = await loadGoods();
+    renderGoods(goods);
     discountRebate();
     formSubmit();
     calculateTotal();

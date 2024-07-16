@@ -19,3 +19,38 @@
     padding: 10px;
   }
 }
+
+.overlay-error {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 350px;
+  height: 350px;
+  top: 33%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  background: #f2f0f9;
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.25);
+
+  display: none;
+}
+
+.error-img {
+  margin-bottom: 33px;
+  text-align: center;
+}
+
+.text-error {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #6e6893;
+}

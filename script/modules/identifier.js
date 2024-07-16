@@ -17,7 +17,7 @@ addProductBtn.addEventListener('click', () => {
 });
 export const overlay = document.querySelector('.overlay');
 export const overlayShow = document.querySelector('.overlay_show');
-export const overlayCloseBtn = document.querySelector('.popup__close');
+export const overlayCloseBtn = document.querySelector('.popup-close');
 export const popup = document.querySelector('.popup');
 export const iconBasket = document.querySelector('.button-basket');
 export const productAddTable = document.querySelector('.form__submit_add-from');
@@ -27,3 +27,5 @@ export const trElements = document.querySelectorAll('tr');
 trElements.forEach((tr) => {
   tr.classList.add('product-tr');
 });
+export const overlayError = document.querySelector('.overlay-error');
+export const overlayErrorShow = document.querySelector('.overlay-error-show');

@@ -3,7 +3,7 @@
 @import 'overlay/overlay.css';
 @import 'overlay/popup/popup.css';
 @import 'overlay/popup/popup__line.css';
-@import 'overlay/popup/close/popup__close.css';
+@import 'overlay/popup/close/popup-close.css';
 @import 'overlay/popup/title/popup__title.css';
 @import 'overlay/popup/form.css';
 @import 'overlay/popup/fieldset/form__fieldset.css';

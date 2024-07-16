@@ -5,10 +5,13 @@ import {
   overlay,
   overlayShow,
   amountMoneyAddFrom,
+  overlayError,
+  overlayErrorShow,
 } from './identifier.js';
 
 import {renderGoods, totalCoast, calculateTotal} from './render.js';
 import {product} from './data.js';
+import {addGood, loadGoods, deleteGood} from './api.js';
 
 export const deleteTr = (e) => {
   const target = e.target;
@@ -23,6 +26,7 @@ export const deleteTr = (e) => {
     if (index !== -1) {
       product.splice(index, 1);
     }
+    deleteGood(deletedId);
 
     console.log(product);
     totalCoast();
@@ -32,8 +36,17 @@ export const deleteTr = (e) => {
 export const closeModal = () => {
   overlay.addEventListener('click', (e) => {
     const target = e.target;
-    if (target === overlay || target === target.closest('.popup__close-img')) {
+    if (target === overlay || target === target.closest('.popup-close-img')) {
       overlayShow.style.display = 'none';
+    }
+  });
+};
+
+export const closeError = () => {
+  overlayError.addEventListener('click', (e) => {
+    const target = e.target;
+    if (target === overlay || target === target.closest('.popup-close-img-error')) {
+      overlayErrorShow.style.display = 'none';
     }
   });
 };
@@ -50,42 +63,50 @@ export const discountRebate = () => {
   });
 };
 
-export const formSubmit = () => {
-  formModal.addEventListener('submit', (e) => {
+export const formSubmit = async () => {
+  formModal.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const formData = new FormData(e.target);
-    const formProduct = {};
-
-    const generateRandomNumbers = () => {
-      let numbers = '';
-      for (let i = 0; i < 9; i++) {
-        numbers += Math.floor(Math.random() * 10) + 1;
-      }
-      return numbers;
+    const formProduct = {
+      title: formData.get('name'),
+      description: formData.get('description'),
+      price: formData.get('price'),
+      count: formData.get('count'),
+      units: formData.get('units'),
+      category: formData.get('category'),
     };
-
-    const randomNumbers = generateRandomNumbers();
-
-    formProduct.id = +randomNumbers;
-    formProduct.title = formData.get('name');
-    formProduct.category = formData.get('category');
-    formProduct.units = formData.get('units');
-    formProduct.description = formData.get('description');
-    formProduct.count = formData.get('count');
-    formProduct.price = formData.get('price');
 
     console.log([formProduct]);
 
-    renderGoods([formProduct]);
-    product.push(formProduct);
-    console.log(product);
-    discount.removeAttribute('required');
+    try {
+      const response = await fetch('https://excited-evanescent-macaroni.glitch.me/api/goods', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formProduct),
+      });
 
-    formModal.reset();
-    amountMoneyAddFrom.textContent = 0;
-    discount.disabled = true;
-    overlayShow.style.display = 'none';
+      if (response.status === 200 || response.status === 201) {
+        const serverResponse = await response.json();
+        console.log('Ответ от сервера:', serverResponse);
+
+        const goods = await loadGoods();
+        renderGoods(goods);
+
+        discount.removeAttribute('required');
+        formModal.reset();
+        amountMoneyAddFrom.textContent = 0;
+        discount.disabled = true;
+        overlayShow.style.display = 'none';
+      } else {
+        overlayError.style.display = 'flex';
+        throw new Error(`Ошибка: ${response.status}`);
+      }
+    } catch (error) {
+      console.error('Ошибка при отправке формы:', error);
+    }
   });
 };
 
