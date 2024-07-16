@@ -10,25 +10,24 @@ import {
 } from './identifier.js';
 
 import {renderGoods, totalCoast, calculateTotal} from './render.js';
-import {product} from './data.js';
 import {addGood, loadGoods, deleteGood} from './api.js';
 
-export const deleteTr = (e) => {
+export const deleteTr = async (e) => {
   const target = e.target;
 
   if (target.closest('.button-basket')) {
     const prodElement = target.closest('.product-tr');
     prodElement.remove();
+    const deletedId = prodElement.querySelector('.thead-crm__item').textContent.trim();
 
-    const deletedId = +prodElement.querySelector('.thead-crm__item').textContent;
-
-    const index = product.findIndex((item) => item.id === deletedId);
-    if (index !== -1) {
-      product.splice(index, 1);
+    try {
+      await deleteGood(deletedId);
+      const goods = await loadGoods();
+      renderGoods(goods);
+    } catch (error) {
+      console.log(error);
     }
-    deleteGood(deletedId);
 
-    console.log(product);
     totalCoast();
   }
 };

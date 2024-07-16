@@ -1,3 +1,5 @@
+import {renderGoods} from './render.js';
+
 export const loadGoods = async (page = 1) => {
   try {
     const url = `https://excited-evanescent-macaroni.glitch.me/api/goods?page=${page}`;
@@ -8,7 +10,7 @@ export const loadGoods = async (page = 1) => {
 
     if (response.goods.length > 0) {
       const nextPageGoods = await loadGoods(page + 1);
-      allGoods = [...allGoods, ...nextPageGoods];
+      allGoods.push(...nextPageGoods);
     }
 
     return allGoods;
@@ -43,17 +45,22 @@ export const addGood = async (newGood) => {
 
 export const deleteGood = async (id) => {
   try {
-    const response = await fetch(`https://excited-evanescent-macaroni.glitch.me/api/goods/${id}`, {
+    const url = `https://excited-evanescent-macaroni.glitch.me/api/goods/${id}`;
+    console.log('URL для удаления:', url);
+
+    const response = await fetch(url, {
       method: 'DELETE',
     });
 
     if (!response.ok) {
-      throw new Error('Network response was not ok');
+      throw new Error(`Network response was not ok: ${response.statusText}`);
     }
+
     const goods = await loadGoods();
+    renderGoods(goods);
 
     return id;
   } catch (error) {
-    console.error('Error:', error);
+    throw error;
   }
 };
