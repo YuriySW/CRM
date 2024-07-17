@@ -9,7 +9,7 @@ import {
   overlayErrorShow,
 } from './identifier.js';
 
-import {renderGoods, totalCoast, calculateTotal} from './render.js';
+import {renderGoods, totalCoast, calculateTotal, clearGoods} from './render.js';
 import {addGood, loadGoods, deleteGood} from './api.js';
 
 export const deleteTr = async (e) => {
@@ -22,8 +22,7 @@ export const deleteTr = async (e) => {
 
     try {
       await deleteGood(deletedId);
-      const goods = await loadGoods();
-      renderGoods(goods);
+      await loadGoods();
     } catch (error) {
       console.log(error);
     }
@@ -90,8 +89,8 @@ export const formSubmit = async () => {
       if (response.status === 200 || response.status === 201) {
         const serverResponse = await response.json();
         console.log('Ответ от сервера:', serverResponse);
-
         const goods = await loadGoods();
+        clearGoods();
         renderGoods(goods);
 
         discount.removeAttribute('required');

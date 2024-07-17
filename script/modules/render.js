@@ -8,11 +8,18 @@ import {
 } from './identifier.js';
 import {createRow} from './createElement.js';
 
+export const clearGoods = () => {
+  const table = document.querySelector('.table-crm');
+  const rows = table.querySelectorAll('tr:not(:first-child)');
+  rows.forEach((row) => row.remove());
+};
+
 export const renderGoods = (arr) => {
   const rows = arr.map(createRow);
   rows.map((trElement) => thead.append(trElement));
 
   totalCoast();
+
   return tableCrm;
 };
 

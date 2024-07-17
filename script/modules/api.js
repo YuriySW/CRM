@@ -34,8 +34,6 @@ export const addGood = async (newGood) => {
     }
 
     const data = await response.json();
-    loadGoods(data);
-    const goods = await loadGoods();
 
     return data.id;
   } catch (error) {
@@ -55,9 +53,6 @@ export const deleteGood = async (id) => {
     if (!response.ok) {
       throw new Error(`Network response was not ok: ${response.statusText}`);
     }
-
-    const goods = await loadGoods();
-    renderGoods(goods);
 
     return id;
   } catch (error) {

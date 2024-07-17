@@ -46,12 +46,6 @@
   padding: 11px 27px;
 }
 
-@media (max-width: 735px) {
-  .form__submit_add-from {
-    margin-bottom: 10px;
-  }
-}
-
 @media (max-width: 559px) {
   .form__submit {
     margin-bottom: 10px;
@@ -69,8 +63,12 @@
     margin-right: 0;
     float: none;
     transform: none;
+  }
+
+  .form__submit_add-from {
     margin-bottom: 10px;
   }
+
   .form__add-img {
     margin-bottom: 20px;
   }
