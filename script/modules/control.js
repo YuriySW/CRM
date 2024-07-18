@@ -65,6 +65,9 @@ export const formSubmit = async () => {
   formModal.addEventListener('submit', async (e) => {
     e.preventDefault();
 
+    const submitButton = e.target.querySelector('button[type="submit"]');
+    submitButton.disabled = true;
+
     const formData = new FormData(e.target);
     const formProduct = {
       title: formData.get('name'),
@@ -104,6 +107,8 @@ export const formSubmit = async () => {
       }
     } catch (error) {
       console.error('Ошибка при отправке формы:', error);
+    } finally {
+      submitButton.disabled = false;
     }
   });
 };
