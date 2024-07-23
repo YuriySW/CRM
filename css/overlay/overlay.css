@@ -3,11 +3,13 @@
   top: 0;
   left: 0;
   right: 0;
+
   min-height: 100%;
   padding: 50px 20px;
   z-index: 1;
   background-color: rgba(0, 0, 0, 0.5);
   display: none;
+  overflow: hidden;
 }
 
 @media (max-width: 660px) {

@@ -1,4 +1,3 @@
-import {product} from './modules/data.js';
 import {checkboxDiscount} from './modules/identifier.js';
 import {closeModal, formSubmit, clearTr, discountRebate, closeError} from './modules/control.js';
 import {renderGoods, calculateTotal} from './modules/render.js';

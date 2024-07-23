@@ -1,5 +1,7 @@
 .popup_crm {
   position: relative;
+  top: 300px;
+
   display: flow-root;
   max-width: 792px;
   padding: 32px 106px 99px;
