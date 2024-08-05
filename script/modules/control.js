@@ -1,16 +1,15 @@
+import {renderGoods, totalCoast, calculateTotal, clearGoods} from './render.js';
+import {loadGoods, deleteGood} from './api.js';
 import {
-  formModal,
+  overlayShow,
+  overlayErrorShow,
+  overlayError,
+  amountMoneyAddFrom,
   checkboxDiscount,
   discount,
   overlay,
-  overlayShow,
-  amountMoneyAddFrom,
-  overlayError,
-  overlayErrorShow,
-} from './identifier.js';
-
-import {renderGoods, totalCoast, calculateTotal, clearGoods} from './render.js';
-import {addGood, loadGoods, deleteGood} from './api.js';
+  formModal,
+} from './modal.js';
 
 export const deleteTr = async (e) => {
   const target = e.target;
@@ -43,7 +42,7 @@ export const closeModal = () => {
 export const closeError = () => {
   overlayError.addEventListener('click', (e) => {
     const target = e.target;
-    if (target === overlay || target === target.closest('.popup-close-img-error')) {
+    if (target === overlayError || target === target.closest('.popup-close-img-error')) {
       overlayErrorShow.style.display = 'none';
     }
   });

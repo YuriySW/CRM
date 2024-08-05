@@ -1,20 +1,25 @@
-import {checkboxDiscount} from './modules/identifier.js';
+import {setupDeleteTrHandler, addProductBtn, editButton} from './modules/identifier.js';
 import {closeModal, formSubmit, clearTr, discountRebate, closeError} from './modules/control.js';
-import {renderGoods, calculateTotal} from './modules/render.js';
-import './modules/api.js';
+import {renderGoods, calculateTotal, editFunc} from './modules/render.js';
 import {loadGoods} from './modules/api.js';
+import {showModal, overlayShow} from './modules/modal.js';
 
-{
-  const init = async () => {
+const init = async () => {
+  addProductBtn.addEventListener('click', async () => {
+    await showModal();
+    overlayShow.style.display = 'block';
+    calculateTotal();
     closeModal();
     closeError();
-    clearTr();
-    const goods = await loadGoods();
-    renderGoods(goods);
     discountRebate();
     formSubmit();
-    calculateTotal();
-  };
+  });
 
-  window.crmInit = init();
-}
+  clearTr();
+  const goods = await loadGoods();
+  renderGoods(goods);
+  editFunc();
+  setupDeleteTrHandler();
+};
+
+window.addEventListener('load', init);

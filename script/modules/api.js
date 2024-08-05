@@ -1,4 +1,4 @@
-import {renderGoods} from './render.js';
+import {overlayShow} from './modal.js';
 
 export const loadGoods = async (page = 1) => {
   try {
@@ -58,4 +58,55 @@ export const deleteGood = async (id) => {
   } catch (error) {
     throw error;
   }
+};
+
+export const updateGood = async (id, updatedGood) => {
+  try {
+    const response = await fetch(`https://excited-evanescent-macaroni.glitch.me/api/goods/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(updatedGood),
+    });
+
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error:', error);
+    throw error;
+  }
+};
+
+export const getGoodById = async (id) => {
+  try {
+    const url = `https://excited-evanescent-macaroni.glitch.me/api/goods/${id}`;
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    const good = await response.json();
+    return good;
+  } catch (error) {
+    console.error('Error:', error);
+  }
+};
+
+export const fillFormWithGoodData = (good) => {
+  const formModal = document.querySelector('.popup__form');
+  formModal.querySelector('#name').value = good.title;
+  formModal.querySelector('#category').value = good.category;
+  formModal.querySelector('#units').value = good.units;
+  formModal.querySelector('#discount').value = good.discount || '';
+  formModal.querySelector('#description').value = good.description;
+  formModal.querySelector('#count').value = good.count;
+  formModal.querySelector('#price').value = good.price;
+
+  overlayShow.style.display = 'block';
 };
