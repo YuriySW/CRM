@@ -5,9 +5,7 @@ import {loadGoods} from './modules/api.js';
 import {showModal, overlayShow} from './modules/modal.js';
 
 const init = async () => {
-  console.log('Initializing application');
   addProductBtn.addEventListener('click', async () => {
-    console.log('Add Product button clicked');
     await showModal();
     overlayShow.style.display = 'block';
     calculateTotal();
@@ -24,5 +22,4 @@ const init = async () => {
   setupDeleteTrHandler();
 };
 
-// window.addEventListener('load', init);
 init();

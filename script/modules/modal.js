@@ -14,7 +14,6 @@ let formModal,
   popup;
 
 const showModal = async () => {
-  // await loadStyle('./../../css/index.css');
   await loadStyle('css/index.css');
 
   const modal = `
