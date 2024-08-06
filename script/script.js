@@ -21,5 +21,5 @@ const init = async () => {
   editFunc();
   setupDeleteTrHandler();
 };
-
+// tt
 window.addEventListener('load', init);
