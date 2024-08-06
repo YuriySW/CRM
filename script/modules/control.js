@@ -1,4 +1,4 @@
-import {renderGoods, totalCoast, calculateTotal, clearGoods} from './render.js';
+import {renderGoods, totalCoast, calculateTotal, clearGoods, editFunc} from './render.js';
 import {loadGoods, deleteGood} from './api.js';
 import {
   overlayShow,
@@ -100,6 +100,7 @@ export const formSubmit = async () => {
         amountMoneyAddFrom.textContent = 0;
         discount.disabled = true;
         overlayShow.style.display = 'none';
+        editFunc();
       } else {
         overlayError.style.display = 'flex';
         throw new Error(`Ошибка: ${response.status}`);
