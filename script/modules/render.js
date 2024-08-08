@@ -32,6 +32,7 @@ export const totalCoast = () => {
 export const calculateTotal = () => {
   const priceInput = formModal.querySelector('#price');
   const countProduct = formModal.querySelector('#count');
+
   if (priceInput.value && countProduct.value) {
     let total = priceInput.value * countProduct.value;
     if (+discount.value) {
@@ -73,6 +74,8 @@ export const editFunc = () => {
         'submit',
         async (e) => {
           e.preventDefault();
+          const priceValue = parseFloat(amountMoneyAddFrom.textContent.replace('$', '').trim());
+
           const updatedGood = {
             title: formModal.querySelector('#name').value,
             category: formModal.querySelector('#category').value,
@@ -80,7 +83,7 @@ export const editFunc = () => {
             discount: formModal.querySelector('#discount').value,
             description: formModal.querySelector('#description').value,
             count: formModal.querySelector('#count').value,
-            price: formModal.querySelector('#price').value,
+            price: priceValue,
           };
 
           await updateGood(goodId, updatedGood);
@@ -93,6 +96,7 @@ export const editFunc = () => {
           row.querySelector('.thead-crm__item:nth-child(7)').textContent = `$${
             updatedGood.count * updatedGood.price
           }`;
+          totalCoast();
         },
         {once: true}
       );

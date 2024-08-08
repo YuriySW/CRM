@@ -68,10 +68,14 @@ export const formSubmit = async () => {
     submitButton.disabled = true;
 
     const formData = new FormData(e.target);
+    const priceValue = amountMoneyAddFrom.textContent.replace('$', '').trim();
+
     const formProduct = {
       title: formData.get('name'),
       description: formData.get('description'),
-      price: formData.get('price'),
+      price: priceValue,
+
+      discount: formData.get('discount'),
       count: formData.get('count'),
       units: formData.get('units'),
       category: formData.get('category'),
@@ -91,6 +95,7 @@ export const formSubmit = async () => {
       if (response.status === 200 || response.status === 201) {
         const serverResponse = await response.json();
         console.log('Ответ от сервера:', serverResponse);
+
         const goods = await loadGoods();
         clearGoods();
         renderGoods(goods);

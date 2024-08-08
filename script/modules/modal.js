@@ -88,7 +88,7 @@ const showModal = async () => {
           <button class="form__submit form__submit_add-from" type="submit">Добавить товар</button>
           <p class="total-amount">
             Итоговая стоимость:
-            <span class="amount-money amount-money_add-from">$ 900.00</span>
+            <span class="amount-money amount-money_add-from">$ 900</span>
           </p>
         </form>
       </div>
@@ -111,6 +111,11 @@ const showModal = async () => {
   overlayError = document.querySelector('.overlay-error');
   overlayErrorShow = document.querySelector('.overlay-error-show');
   popup = document.querySelector('.popup');
+
+  // const priceInput = document.querySelector('.form__input_price');
+  // if (priceInput) {
+  //   priceInput.value = amountMoneyAddFrom.textContent.replace('$', '').trim();
+  // }
 };
 
 export {
