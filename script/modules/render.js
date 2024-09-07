@@ -1,8 +1,17 @@
 import {thead, tableCrm, amountMoneyCms} from './identifier.js';
 import {createRow} from './createElement.js';
-import {formModal, discount, amountMoneyAddFrom, showModal, overlayShow} from './modal.js';
-import {getGoodById, updateGood, fillFormWithGoodData} from './api.js';
+import {
+  formModal,
+  discount,
+  amountMoneyAddFrom,
+  showModal,
+  overlayShow,
+  popupTitle,
+  formInputPrice,
+} from './modal.js';
+import {getGoodById, updateGood} from './api.js';
 import {closeModal, discountRebate, closeError} from './control.js';
+import {checkboxDiscount} from './modal.js';
 
 export const clearGoods = () => {
   const table = document.querySelector('.table-crm');
@@ -25,24 +34,77 @@ export const totalCoast = () => {
   allRows.forEach((row) => {
     totalSum += +row.textContent.slice(1);
   });
-  amountMoneyCms.textContent = `$${totalSum}`;
+  amountMoneyCms.textContent = `$${Math.round(totalSum)}`;
   return totalSum;
+};
+
+export const discountState = {
+  isDiscountAlreadyApplied: false,
+};
+
+const fillFormWithGoodData = (good) => {
+  const formModal = document.querySelector('.popup__form');
+  formModal.querySelector('#name').value = good.title;
+  formModal.querySelector('#category').value = good.category;
+  formModal.querySelector('#units').value = good.units;
+  formModal.querySelector('#discount').value = good.discount || '';
+  formModal.querySelector('#description').value = good.description;
+  formModal.querySelector('#count').value = good.count;
+  formModal.querySelector('#price').value = good.price;
+
+  // Устанавливаем оригинальную цену для дальнейшего пересчета
+  discountState.originalPrice = +good.price;
+
+  // Если есть скидка, вызываем calculateTotal() для пересчета цены с учетом скидки
+  if (good.discount > 0) {
+    discount.disabled = false;
+    checkboxDiscount.checked = true;
+    discountState.isDiscountAlreadyApplied = false; // Сброс состояния для пересчета
+    calculateTotal(); // Пересчитываем цену с учетом скидки
+  }
+
+  overlayShow.style.display = 'block';
 };
 
 export const calculateTotal = () => {
   const priceInput = formModal.querySelector('#price');
   const countProduct = formModal.querySelector('#count');
 
+  // Проверяем, что оба значения заполнены
   if (priceInput.value && countProduct.value) {
-    let total = priceInput.value * countProduct.value;
-    if (+discount.value) {
-      total -= (total / 100) * +discount.value;
+    let finalPricePerUnit = discountState.originalPrice || +priceInput.value; // Используем оригинальную цену или текущую цену в поле
+    let total = finalPricePerUnit * countProduct.value;
+
+    // Применяем скидку, если она есть и еще не была применена
+    if (+discount.value && !discountState.isDiscountAlreadyApplied) {
+      finalPricePerUnit -= (finalPricePerUnit / 100) * +discount.value; // Применяем скидку
+      total = finalPricePerUnit * countProduct.value; // Пересчитываем общую стоимость с учетом скидки
+      discountState.isDiscountAlreadyApplied = true; // Отмечаем, что скидка была применена
     }
-    amountMoneyAddFrom.textContent = `$ ${total}`;
+
+    // Обновляем отображение итоговой суммы
+    amountMoneyAddFrom.textContent = `$ ${Math.round(total)}`;
+
+    // Сохраняем конечную цену для отправки на сервер и обновляем поле цены
+    formModal.dataset.finalPricePerUnit = Math.round(finalPricePerUnit);
+    priceInput.value = finalPricePerUnit.toFixed(); // Обновляем поле цены в UI
   }
-  priceInput.addEventListener('input', calculateTotal);
+
+  // Слушатель для изменения значения в поле цены
+  priceInput.addEventListener('input', () => {
+    discountState.originalPrice = +priceInput.value; // Обновляем оригинальную цену при ручном изменении
+    discountState.isDiscountAlreadyApplied = false; // Сбрасываем состояние применения скидки
+    calculateTotal(); // Пересчитываем итоговую стоимость
+  });
+
+  // Слушатель для изменения количества товара
   countProduct.addEventListener('input', calculateTotal);
-  discount.addEventListener('input', calculateTotal);
+
+  // Слушатель для изменения скидки
+  discount.addEventListener('input', () => {
+    discountState.isDiscountAlreadyApplied = false; // Сбрасываем состояние применения скидки при изменении значения
+    calculateTotal();
+  });
 };
 
 export const editFunc = () => {
@@ -52,7 +114,7 @@ export const editFunc = () => {
     button.addEventListener('click', async (e) => {
       const row = e.target.closest('tr');
       const goodId = row.querySelector('.thead-crm__item').textContent.trim();
-
+      console.log('ffff', row);
       if (!goodId) {
         console.error('Good ID is not defined');
         return;
@@ -62,20 +124,39 @@ export const editFunc = () => {
       console.log(goodId, good);
 
       await showModal();
+
+      popupTitle.textContent = 'Изменить товар';
       overlayShow.style.display = 'block';
+
       fillFormWithGoodData(good);
+
+      if (good.discount > 0) {
+        discount.disabled = false;
+        checkboxDiscount.checked = true;
+        discountState.isDiscountAlreadyApplied = true;
+        // formInputPrice.value = '77';
+        console.log(formInputPrice.value);
+      } else {
+        discount.disabled = true;
+        discount.value = '';
+        discountState.isDiscountAlreadyApplied = false;
+      }
+
+      discountRebate();
       calculateTotal();
+
       closeModal();
       closeError();
-      discountRebate();
 
       const formModal = document.querySelector('.popup__form');
       formModal.addEventListener(
         'submit',
         async (e) => {
           e.preventDefault();
-          const priceValue = parseFloat(amountMoneyAddFrom.textContent.replace('$', '').trim());
 
+          // Получаем цену за одну единицу с учётом скидки или без неё
+          // const finalPricePerUnit = parseFloat(formModal.dataset.finalPricePerUnit);
+          // console.log(`in ${finalPricePerUnit}`);
           const updatedGood = {
             title: formModal.querySelector('#name').value,
             category: formModal.querySelector('#category').value,
@@ -83,7 +164,8 @@ export const editFunc = () => {
             discount: formModal.querySelector('#discount').value,
             description: formModal.querySelector('#description').value,
             count: formModal.querySelector('#count').value,
-            price: priceValue,
+            price: formModal.querySelector('#price').value,
+            // price: finalPricePerUnit, // Отправляем цену за единицу
           };
 
           await updateGood(goodId, updatedGood);
@@ -96,6 +178,7 @@ export const editFunc = () => {
           row.querySelector('.thead-crm__item:nth-child(7)').textContent = `$${
             updatedGood.count * updatedGood.price
           }`;
+
           totalCoast();
         },
         {once: true}
@@ -103,3 +186,4 @@ export const editFunc = () => {
     });
   });
 };
+//////20ю08

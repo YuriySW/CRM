@@ -1,6 +1,6 @@
 import loadStyle from './loadStyle.js';
 
-let formModal,
+export let formModal,
   checkboxDiscount,
   discount,
   totalAmount,
@@ -11,7 +11,9 @@ let formModal,
   amountMoneyAddFrom,
   overlayError,
   overlayErrorShow,
-  popup;
+  popup,
+  formInputPrice,
+  popupTitle;
 
 const showModal = async () => {
   await loadStyle('css/index.css');
@@ -29,7 +31,7 @@ const showModal = async () => {
         <button class="popup-close" type="button">
           <img class="popup-close-img" src="img/icons/close.svg" alt="" />
         </button>
-        <h2 class="popup__title">Добавить товар</h2>
+        <h2 class="popup__title popup__title_modal">Добавить товар</h2>
         <div class="popup__line"></div>
         <form
           class="popup__form form"
@@ -111,7 +113,8 @@ const showModal = async () => {
   overlayError = document.querySelector('.overlay-error');
   overlayErrorShow = document.querySelector('.overlay-error-show');
   popup = document.querySelector('.popup');
-
+  popupTitle = document.querySelector('.popup__title_modal');
+  formInputPrice = document.querySelector('.form__input_price');
   // const priceInput = document.querySelector('.form__input_price');
   // if (priceInput) {
   //   priceInput.value = amountMoneyAddFrom.textContent.replace('$', '').trim();
@@ -119,17 +122,18 @@ const showModal = async () => {
 };
 
 export {
-  formModal,
-  checkboxDiscount,
-  discount,
-  totalAmount,
-  overlay,
-  overlayShow,
-  overlayCloseBtn,
-  productAddTable,
-  amountMoneyAddFrom,
-  overlayError,
-  overlayErrorShow,
-  popup,
+  // formModal,
+  // checkboxDiscount,
+  // discount,
+  // totalAmount,
+  // overlay,
+  // overlayShow,
+  // overlayCloseBtn,
+  // productAddTable,
+  // amountMoneyAddFrom,
+  // overlayError,
+  // overlayErrorShow,
+  // popup,
+  // popupTitle,
   showModal,
 };

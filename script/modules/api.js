@@ -98,15 +98,16 @@ export const getGoodById = async (id) => {
   }
 };
 
-export const fillFormWithGoodData = (good) => {
-  const formModal = document.querySelector('.popup__form');
-  formModal.querySelector('#name').value = good.title;
-  formModal.querySelector('#category').value = good.category;
-  formModal.querySelector('#units').value = good.units;
-  formModal.querySelector('#discount').value = good.discount || '';
-  formModal.querySelector('#description').value = good.description;
-  formModal.querySelector('#count').value = good.count;
-  formModal.querySelector('#price').value = good.price;
+// export const fillFormWithGoodData = (good) => {
+//   const formModal = document.querySelector('.popup__form');
+//   formModal.querySelector('#name').value = good.title;
+//   formModal.querySelector('#category').value = good.category;
+//   formModal.querySelector('#units').value = good.units;
+//   formModal.querySelector('#discount').value = good.discount || '';
+//   formModal.querySelector('#description').value = good.description;
+//   formModal.querySelector('#count').value = good.count;
+//   formModal.querySelector('#price').value = good.price;
+//   console.log('TAAA', good.price);
 
-  overlayShow.style.display = 'block';
-};
+//   overlayShow.style.display = 'block';
+// };
