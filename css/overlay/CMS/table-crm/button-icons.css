@@ -13,7 +13,6 @@
   fill: #cd06ff;
 }
 
-.button-edit:hover svg path,
 .button-edit:focus svg path {
   transition: 0.4s;
   stroke: #cd06ff;
@@ -29,4 +28,8 @@
 .button-edit:active svg path {
   transition: 0.4s;
   stroke: #351db8;
+}
+.button-edit:hover svg path {
+  fill: none; /* Закрашивает внутреннюю часть */
+  stroke: #cd06ff; /* Отключает обводку */
 }

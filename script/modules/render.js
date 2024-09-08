@@ -114,7 +114,7 @@ export const editFunc = () => {
     button.addEventListener('click', async (e) => {
       const row = e.target.closest('tr');
       const goodId = row.querySelector('.thead-crm__item').textContent.trim();
-      console.log('ffff', row);
+
       if (!goodId) {
         console.error('Good ID is not defined');
         return;
@@ -134,8 +134,6 @@ export const editFunc = () => {
         discount.disabled = false;
         checkboxDiscount.checked = true;
         discountState.isDiscountAlreadyApplied = true;
-        // formInputPrice.value = '77';
-        console.log(formInputPrice.value);
       } else {
         discount.disabled = true;
         discount.value = '';
