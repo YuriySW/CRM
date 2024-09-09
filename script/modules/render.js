@@ -52,15 +52,13 @@ const fillFormWithGoodData = (good) => {
   formModal.querySelector('#count').value = good.count;
   formModal.querySelector('#price').value = good.price;
 
-  // Устанавливаем оригинальную цену для дальнейшего пересчета
   discountState.originalPrice = +good.price;
 
-  // Если есть скидка, вызываем calculateTotal() для пересчета цены с учетом скидки
   if (good.discount > 0) {
     discount.disabled = false;
     checkboxDiscount.checked = true;
-    discountState.isDiscountAlreadyApplied = false; // Сброс состояния для пересчета
-    calculateTotal(); // Пересчитываем цену с учетом скидки
+    discountState.isDiscountAlreadyApplied = false;
+    calculateTotal();
   }
 
   overlayShow.style.display = 'block';
@@ -70,39 +68,32 @@ export const calculateTotal = () => {
   const priceInput = formModal.querySelector('#price');
   const countProduct = formModal.querySelector('#count');
 
-  // Проверяем, что оба значения заполнены
   if (priceInput.value && countProduct.value) {
-    let finalPricePerUnit = discountState.originalPrice || +priceInput.value; // Используем оригинальную цену или текущую цену в поле
+    let finalPricePerUnit = discountState.originalPrice || +priceInput.value;
     let total = finalPricePerUnit * countProduct.value;
 
-    // Применяем скидку, если она есть и еще не была применена
     if (+discount.value && !discountState.isDiscountAlreadyApplied) {
-      finalPricePerUnit -= (finalPricePerUnit / 100) * +discount.value; // Применяем скидку
-      total = finalPricePerUnit * countProduct.value; // Пересчитываем общую стоимость с учетом скидки
-      discountState.isDiscountAlreadyApplied = true; // Отмечаем, что скидка была применена
+      finalPricePerUnit -= (finalPricePerUnit / 100) * +discount.value;
+      total = finalPricePerUnit * countProduct.value;
+      discountState.isDiscountAlreadyApplied = true;
     }
 
-    // Обновляем отображение итоговой суммы
     amountMoneyAddFrom.textContent = `$ ${Math.round(total)}`;
 
-    // Сохраняем конечную цену для отправки на сервер и обновляем поле цены
     formModal.dataset.finalPricePerUnit = Math.round(finalPricePerUnit);
-    priceInput.value = finalPricePerUnit.toFixed(); // Обновляем поле цены в UI
+    priceInput.value = finalPricePerUnit.toFixed();
   }
 
-  // Слушатель для изменения значения в поле цены
   priceInput.addEventListener('input', () => {
-    discountState.originalPrice = +priceInput.value; // Обновляем оригинальную цену при ручном изменении
-    discountState.isDiscountAlreadyApplied = false; // Сбрасываем состояние применения скидки
-    calculateTotal(); // Пересчитываем итоговую стоимость
+    discountState.originalPrice = +priceInput.value;
+    discountState.isDiscountAlreadyApplied = false;
+    calculateTotal();
   });
 
-  // Слушатель для изменения количества товара
   countProduct.addEventListener('input', calculateTotal);
 
-  // Слушатель для изменения скидки
   discount.addEventListener('input', () => {
-    discountState.isDiscountAlreadyApplied = false; // Сбрасываем состояние применения скидки при изменении значения
+    discountState.isDiscountAlreadyApplied = false;
     calculateTotal();
   });
 };
@@ -152,9 +143,6 @@ export const editFunc = () => {
         async (e) => {
           e.preventDefault();
 
-          // Получаем цену за одну единицу с учётом скидки или без неё
-          // const finalPricePerUnit = parseFloat(formModal.dataset.finalPricePerUnit);
-          // console.log(`in ${finalPricePerUnit}`);
           const updatedGood = {
             title: formModal.querySelector('#name').value,
             category: formModal.querySelector('#category').value,
@@ -163,7 +151,6 @@ export const editFunc = () => {
             description: formModal.querySelector('#description').value,
             count: formModal.querySelector('#count').value,
             price: formModal.querySelector('#price').value,
-            // price: finalPricePerUnit, // Отправляем цену за единицу
           };
 
           await updateGood(goodId, updatedGood);
@@ -184,4 +171,3 @@ export const editFunc = () => {
     });
   });
 };
-//////20ю08

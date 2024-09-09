@@ -69,88 +69,6 @@ export const discountRebate = () => {
   });
 };
 
-// export const discountRebate = () => {
-//   checkboxDiscount.addEventListener('change', (e) => {
-//     if (e.target.checked) {
-//       discount.disabled = false;
-//     } else {
-//       discount.disabled = true;
-//       discount.value = ''; // Сбрасываем значение скидки в UI
-
-//       // Возвращаем цену к оригинальной, если скидка была отключена
-//       formModal.querySelector('#price').value = discountState.originalPrice;
-
-//       // Пересчитываем итоговую стоимость без скидки
-//       calculateTotal();
-//     }
-//   });
-// };
-
-// export const formSubmit = async () => {
-//   formModal.addEventListener('submit', async (e) => {
-//     e.preventDefault();
-
-//     const submitButton = e.target.querySelector('button[type="submit"]');
-//     submitButton.disabled = true;
-
-//     const formData = new FormData(e.target);
-
-//     let priceValue;
-
-//     if (checkboxDiscount.checked && discount.value) {
-//       priceValue = parseFloat(formData.get('price'));
-
-//       // Вычисляем скидку
-//       const discountValue = parseFloat(discount.value);
-//       priceValue = priceValue * (1 - discountValue / 100); // Применяем скидку
-//     } else {
-//       priceValue = parseFloat(formData.get('price')); // если скидки нет, берем оригинальную цену
-//     }
-
-//     const formProduct = {
-//       title: formData.get('name'),
-//       description: formData.get('description'),
-//       price: priceValue,
-//       discount: formData.get('discount') || 0,
-//       count: formData.get('count'),
-//       units: formData.get('units'),
-//       category: formData.get('category'),
-//     };
-
-//     try {
-//       const response = await fetch('https://excited-evanescent-macaroni.glitch.me/api/goods', {
-//         method: 'POST',
-//         headers: {
-//           'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify(formProduct),
-//       });
-
-//       if (response.status === 200 || response.status === 201) {
-//         const serverResponse = await response.json();
-//         console.log('Ответ от сервера:', serverResponse);
-
-//         const goods = await loadGoods();
-//         clearGoods();
-//         renderGoods(goods);
-
-//         formModal.reset();
-//         amountMoneyAddFrom.textContent = '$0';
-//         discount.disabled = true;
-//         overlayShow.style.display = 'none';
-//         editFunc();
-//       } else {
-//         overlayError.style.display = 'flex';
-//         throw new Error(`Ошибка: ${response.status}`);
-//       }
-//     } catch (error) {
-//       console.error('Ошибка при отправке формы:', error);
-//     } finally {
-//       submitButton.disabled = false;
-//     }
-//   });
-// };
-
 export const formSubmit = async () => {
   formModal.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -160,13 +78,13 @@ export const formSubmit = async () => {
 
     const formData = new FormData(e.target);
 
-    let priceValue = parseFloat(formData.get('price')); // Начальная цена без скидки
+    let priceValue = parseFloat(formData.get('price'));
 
     if (checkboxDiscount.checked && discount.value) {
       const discountValue = parseFloat(discount.value);
       if (!discountState.isDiscountAlreadyApplied) {
-        priceValue = priceValue * (1 - discountValue / 100); // Применяем скидку только один раз
-        discountState.isDiscountAlreadyApplied = true; // Обновляем состояние, что скидка применена
+        priceValue = priceValue * (1 - discountValue / 100);
+        discountState.isDiscountAlreadyApplied = true;
       }
     }
 

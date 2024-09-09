@@ -115,25 +115,6 @@ const showModal = async () => {
   popup = document.querySelector('.popup');
   popupTitle = document.querySelector('.popup__title_modal');
   formInputPrice = document.querySelector('.form__input_price');
-  // const priceInput = document.querySelector('.form__input_price');
-  // if (priceInput) {
-  //   priceInput.value = amountMoneyAddFrom.textContent.replace('$', '').trim();
-  // }
 };
 
-export {
-  // formModal,
-  // checkboxDiscount,
-  // discount,
-  // totalAmount,
-  // overlay,
-  // overlayShow,
-  // overlayCloseBtn,
-  // productAddTable,
-  // amountMoneyAddFrom,
-  // overlayError,
-  // overlayErrorShow,
-  // popup,
-  // popupTitle,
-  showModal,
-};
+export {showModal};

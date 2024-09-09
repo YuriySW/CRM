@@ -10,12 +10,12 @@
 .button-basket svg:focus path,
 .button-img svg:focus path {
   transition: 0.4s;
-  fill: #cd06ff;
+  fill: #190878;
 }
 
 .button-edit:focus svg path {
   transition: 0.4s;
-  stroke: #cd06ff;
+  stroke: #190878;
 }
 
 .button-img-close svg:active path,
@@ -30,6 +30,6 @@
   stroke: #351db8;
 }
 .button-edit:hover svg path {
-  fill: none; /* Закрашивает внутреннюю часть */
-  stroke: #cd06ff; /* Отключает обводку */
+  fill: none;
+  stroke: #190878;
 }
