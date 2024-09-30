@@ -18,6 +18,8 @@ import {
   formModal,
 } from './modal.js';
 
+import {createRow} from './createElement.js';
+
 export const deleteTr = async (e) => {
   const target = e.target;
 
@@ -111,15 +113,20 @@ export const formSubmit = async () => {
         const serverResponse = await response.json();
         console.log('Ответ от сервера:', serverResponse);
 
-        const goods = await loadGoods();
-        clearGoods();
-        renderGoods(goods);
+        // const goods = await loadGoods();
+        // clearGoods();
+        // await renderGoods(goods);
+        const newRow = await createRow(serverResponse);
+        const tableBody = document.querySelector('.thead-crm');
+        tableBody.appendChild(newRow);
+
+        editFunc();
 
         formModal.reset();
         amountMoneyAddFrom.textContent = '$0';
         discount.disabled = true;
         overlayShow.style.display = 'none';
-        editFunc();
+        // editFunc();
       } else {
         overlayError.style.display = 'flex';
         throw new Error(`Ошибка: ${response.status}`);

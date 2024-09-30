@@ -8,6 +8,7 @@ import {
   overlayShow,
   popupTitle,
   formInputPrice,
+  productAddTable,
 } from './modal.js';
 import {getGoodById, updateGood} from './api.js';
 import {closeModal, discountRebate, closeError} from './control.js';
@@ -19,13 +20,18 @@ export const clearGoods = () => {
   rows.forEach((row) => row.remove());
 };
 
-export const renderGoods = (arr) => {
-  const rows = arr.map(createRow);
-  rows.map((trElement) => thead.append(trElement));
+export const renderGoods = async (arr) => {
+  try {
+    const rows = await Promise.all(arr.map(createRow));
 
-  totalCoast();
+    rows.forEach((trElement) => thead.append(trElement));
 
-  return tableCrm;
+    totalCoast();
+
+    return tableCrm;
+  } catch (error) {
+    console.error('Ошибка при рендеринге товаров:', error);
+  }
 };
 
 export const totalCoast = () => {
@@ -58,10 +64,43 @@ const fillFormWithGoodData = (good) => {
     discount.disabled = false;
     checkboxDiscount.checked = true;
     discountState.isDiscountAlreadyApplied = false;
+
     calculateTotal();
   }
 
   overlayShow.style.display = 'block';
+};
+
+export const calculateTotalEdit = () => {
+  const priceInput = formModal.querySelector('#price');
+  const countProduct = formModal.querySelector('#count');
+  const discountValue = +discount.value || 0;
+
+  if (priceInput.value && countProduct.value) {
+    const originalPrice = +priceInput.value;
+    const count = +countProduct.value;
+
+    let totalPrice = originalPrice * count;
+
+    if (discountValue) {
+      const discountAmount = (originalPrice * discountValue) / 100;
+      totalPrice = (originalPrice - discountAmount) * count;
+    }
+
+    amountMoneyAddFrom.textContent = `$ ${Math.round(totalPrice)}`;
+  }
+
+  priceInput.addEventListener('input', () => {
+    discountState.isDiscountAlreadyApplied = false;
+    calculateTotalEdit();
+  });
+
+  countProduct.addEventListener('input', calculateTotalEdit);
+
+  discount.addEventListener('input', () => {
+    discountState.isDiscountAlreadyApplied = false;
+    calculateTotalEdit();
+  });
 };
 
 export const calculateTotal = () => {
@@ -69,23 +108,21 @@ export const calculateTotal = () => {
   const countProduct = formModal.querySelector('#count');
 
   if (priceInput.value && countProduct.value) {
-    let finalPricePerUnit = discountState.originalPrice || +priceInput.value;
-    let total = finalPricePerUnit * countProduct.value;
+    let originalPrice = +priceInput.value;
+    let total = originalPrice * countProduct.value;
 
     if (+discount.value && !discountState.isDiscountAlreadyApplied) {
-      finalPricePerUnit -= (finalPricePerUnit / 100) * +discount.value;
-      total = finalPricePerUnit * countProduct.value;
+      const discountValue = (originalPrice * +discount.value) / 100;
+      const discountedPrice = originalPrice - discountValue;
+      total = discountedPrice * countProduct.value;
+
       discountState.isDiscountAlreadyApplied = true;
     }
 
     amountMoneyAddFrom.textContent = `$ ${Math.round(total)}`;
-
-    formModal.dataset.finalPricePerUnit = Math.round(finalPricePerUnit);
-    priceInput.value = finalPricePerUnit.toFixed();
   }
 
   priceInput.addEventListener('input', () => {
-    discountState.originalPrice = +priceInput.value;
     discountState.isDiscountAlreadyApplied = false;
     calculateTotal();
   });
@@ -117,6 +154,7 @@ export const editFunc = () => {
       await showModal();
 
       popupTitle.textContent = 'Изменить товар';
+      productAddTable.textContent = 'Изменить товар';
       overlayShow.style.display = 'block';
 
       fillFormWithGoodData(good);
@@ -132,7 +170,7 @@ export const editFunc = () => {
       }
 
       discountRebate();
-      calculateTotal();
+      calculateTotalEdit();
 
       closeModal();
       closeError();
@@ -155,14 +193,24 @@ export const editFunc = () => {
 
           await updateGood(goodId, updatedGood);
           overlayShow.style.display = 'none';
+
           row.querySelector('.thead-crm__item:nth-child(2)').textContent = updatedGood.title;
           row.querySelector('.thead-crm__item:nth-child(3)').textContent = updatedGood.category;
           row.querySelector('.thead-crm__item:nth-child(4)').textContent = updatedGood.units;
           row.querySelector('.thead-crm__item:nth-child(5)').textContent = updatedGood.count;
           row.querySelector('.thead-crm__item:nth-child(6)').textContent = `$${updatedGood.price}`;
-          row.querySelector('.thead-crm__item:nth-child(7)').textContent = `$${
-            updatedGood.count * updatedGood.price
-          }`;
+
+          const discountValue = +updatedGood.discount || 0;
+          let totalPrice = +updatedGood.price * +updatedGood.count;
+
+          if (discountValue > 0) {
+            const discountAmount = (+updatedGood.price * discountValue) / 100;
+            totalPrice = (+updatedGood.price - discountAmount) * +updatedGood.count;
+          }
+
+          row.querySelector('.thead-crm__item:nth-child(7)').textContent = `$${Math.round(
+            totalPrice
+          )}`;
 
           totalCoast();
         },

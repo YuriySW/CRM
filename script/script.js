@@ -18,7 +18,8 @@ const init = async () => {
 
   clearTr();
   const goods = await loadGoods();
-  renderGoods(goods);
+
+  await renderGoods(goods);
   editFunc();
 
   setupDeleteTrHandler();
