@@ -19,6 +19,7 @@ import {
 } from './modal.js';
 
 import {createRow} from './createElement.js';
+import {editButton} from './identifier.js';
 
 export const deleteTr = async (e) => {
   const target = e.target;
@@ -121,6 +122,12 @@ export const formSubmit = async () => {
         tableBody.appendChild(newRow);
 
         // editFunc();
+
+        // const editButton = newRow.querySelector('.edit-btn');
+        editButton.addEventListener('click', () => {
+          // Вызов функции редактирования для этой строки
+          editFunc();
+        });
 
         formModal.reset();
         amountMoneyAddFrom.textContent = '$0';
