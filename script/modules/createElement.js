@@ -24,7 +24,7 @@ export const createRow = async ({id, title, category, units, count, price}) => {
   <td class="thead-crm__item thead-crm__item_pieces thead-crm__item_centr">${units}</td>
   <td class="thead-crm__item thead-crm__item_centr">${count}</td>
   <td class="thead-crm__item thead-crm__item_centr">$${price}</td>
-  <td class="thead-crm__item thead-crm__item_centr">$${total}</td>
+  <td class="thead-crm__item thead-crm__item_centr">$${Math.round(total)}</td>
 <td class="thead-crm__item">
   <div class="set-buttons-wrap">
     <button class="${buttonImg} button-icons">

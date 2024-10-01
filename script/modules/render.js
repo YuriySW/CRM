@@ -135,6 +135,20 @@ export const calculateTotal = () => {
   });
 };
 
+export const discountRebateEdit = () => {
+  checkboxDiscount.addEventListener('change', (e) => {
+    if (e.target.checked) {
+      discount.disabled = false;
+    } else {
+      discount.disabled = true;
+      discount.value = '';
+      discountState.isDiscountAlreadyApplied = true;
+
+      calculateTotalEdit();
+    }
+  });
+};
+
 export const editFunc = () => {
   const editButtons = document.querySelectorAll('.button-edit');
 
@@ -169,7 +183,7 @@ export const editFunc = () => {
         discountState.isDiscountAlreadyApplied = false;
       }
 
-      discountRebate();
+      discountRebateEdit();
       calculateTotalEdit();
 
       closeModal();

@@ -120,7 +120,7 @@ export const formSubmit = async () => {
         const tableBody = document.querySelector('.thead-crm');
         tableBody.appendChild(newRow);
 
-        editFunc();
+        // editFunc();
 
         formModal.reset();
         amountMoneyAddFrom.textContent = '$0';
