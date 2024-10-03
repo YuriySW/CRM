@@ -114,26 +114,29 @@ export const formSubmit = async () => {
         const serverResponse = await response.json();
         console.log('Ответ от сервера:', serverResponse);
 
-        // const goods = await loadGoods();
-        // clearGoods();
-        // await renderGoods(goods);
-        const newRow = await createRow(serverResponse);
-        const tableBody = document.querySelector('.thead-crm');
-        tableBody.appendChild(newRow);
+        const goods = await loadGoods();
+        clearGoods();
+        await renderGoods(goods);
 
-        // editFunc();
+        // const newRow = await createRow(serverResponse);
+        // const tableBody = document.querySelector('.thead-crm');
+        // tableBody.appendChild(newRow);
 
-        // const editButton = newRow.querySelector('.edit-btn');
-        editButton.addEventListener('click', () => {
-          // Вызов функции редактирования для этой строки
-          editFunc();
-        });
+        // // editFunc();
+
+        // const editButton = newRow.querySelector('.button-edit'); // Исправлено: правильный селектор
+
+        // editButton.addEventListener('click', () => {
+        //   // Вызов функции редактирования для этой строки
+        //   editFunc(); // Используем вашу текущую реализацию editFunc
+        // });
 
         formModal.reset();
         amountMoneyAddFrom.textContent = '$0';
         discount.disabled = true;
         overlayShow.style.display = 'none';
-        // editFunc();
+
+        editFunc();
       } else {
         overlayError.style.display = 'flex';
         throw new Error(`Ошибка: ${response.status}`);
