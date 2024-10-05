@@ -118,6 +118,9 @@ export const createRow = async ({id, title, category, units, count, price}) => {
 
     window.open(url, '', `width=${width},height=${height},top=${top},left=${left}`);
   });
+  setTimeout(() => {
+    editFunc();
+  }, 1);
 
   return trElement;
 };

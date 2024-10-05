@@ -20,7 +20,7 @@ const init = async () => {
   const goods = await loadGoods();
 
   await renderGoods(goods);
-  editFunc();
+  // editFunc();
 
   setupDeleteTrHandler();
 };

@@ -114,13 +114,13 @@ export const formSubmit = async () => {
         const serverResponse = await response.json();
         console.log('Ответ от сервера:', serverResponse);
 
-        const goods = await loadGoods();
-        clearGoods();
-        await renderGoods(goods);
+        // const goods = await loadGoods();
+        // clearGoods();
+        // await renderGoods(goods);
 
-        // const newRow = await createRow(serverResponse);
-        // const tableBody = document.querySelector('.thead-crm');
-        // tableBody.appendChild(newRow);
+        const newRow = await createRow(serverResponse);
+        const tableBody = document.querySelector('.thead-crm');
+        tableBody.appendChild(newRow);
 
         // // editFunc();
 
@@ -136,7 +136,7 @@ export const formSubmit = async () => {
         discount.disabled = true;
         overlayShow.style.display = 'none';
 
-        editFunc();
+        // editFunc();
       } else {
         overlayError.style.display = 'flex';
         throw new Error(`Ошибка: ${response.status}`);
