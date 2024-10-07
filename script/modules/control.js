@@ -122,22 +122,7 @@ export const formSubmit = async () => {
         const tableBody = document.querySelector('.thead-crm');
         tableBody.appendChild(newRow);
 
-        // // editFunc();
-
-        const editButton = newRow.querySelector('.button-edit'); // Исправлено: правильный селектор
-
-        // editButton.addEventListener('click', async (e) => {
-        //   // Вызов функции редактирования для этой строки
-        //   editFunc(); // Используем вашу текущую реализацию editFunc
-        // });
-
-        // После добавления новой строки добавляем обработчик событий
-        // const editButton = newRow.querySelector('.button-edit');
-        // if (editButton) {
-        //   editButton.addEventListener('click', async (e) => {
-        //     await editFunc();
-        //   });
-        // }
+        const editButton = newRow.querySelector('.button-edit');
 
         formModal.reset();
         amountMoneyAddFrom.textContent = '$0';
@@ -145,6 +130,7 @@ export const formSubmit = async () => {
         overlayShow.style.display = 'none';
 
         editFunc();
+        totalCoast();
       } else {
         overlayError.style.display = 'flex';
         throw new Error(`Ошибка: ${response.status}`);
