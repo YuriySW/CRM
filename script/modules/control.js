@@ -124,19 +124,27 @@ export const formSubmit = async () => {
 
         // // editFunc();
 
-        // const editButton = newRow.querySelector('.button-edit'); // Исправлено: правильный селектор
+        const editButton = newRow.querySelector('.button-edit'); // Исправлено: правильный селектор
 
-        // editButton.addEventListener('click', () => {
+        // editButton.addEventListener('click', async (e) => {
         //   // Вызов функции редактирования для этой строки
         //   editFunc(); // Используем вашу текущую реализацию editFunc
         // });
+
+        // После добавления новой строки добавляем обработчик событий
+        // const editButton = newRow.querySelector('.button-edit');
+        // if (editButton) {
+        //   editButton.addEventListener('click', async (e) => {
+        //     await editFunc();
+        //   });
+        // }
 
         formModal.reset();
         amountMoneyAddFrom.textContent = '$0';
         discount.disabled = true;
         overlayShow.style.display = 'none';
 
-        // editFunc();
+        editFunc();
       } else {
         overlayError.style.display = 'flex';
         throw new Error(`Ошибка: ${response.status}`);
