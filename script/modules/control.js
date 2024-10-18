@@ -16,6 +16,8 @@ import {
   discount,
   overlay,
   formModal,
+  preview,
+  file,
 } from './modal.js';
 
 import {createRow} from './createElement.js';
@@ -80,7 +82,7 @@ export const formSubmit = async () => {
     submitButton.disabled = true;
 
     const formData = new FormData(e.target);
-
+    const fileInput = document.querySelector('#file');
     let priceValue = parseFloat(formData.get('price'));
 
     if (checkboxDiscount.checked && discount.value) {
@@ -91,6 +93,20 @@ export const formSubmit = async () => {
       }
     }
 
+    let base64Image = '';
+    if (fileInput.files.length > 0) {
+      const file = fileInput.files[0];
+      const reader = new FileReader();
+
+      base64Image = await new Promise((resolve, reject) => {
+        reader.onloadend = function () {
+          resolve(reader.result);
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
     const formProduct = {
       title: formData.get('name'),
       description: formData.get('description'),
@@ -99,7 +115,10 @@ export const formSubmit = async () => {
       count: formData.get('count'),
       units: formData.get('units'),
       category: formData.get('category'),
+      image: base64Image,
     };
+
+    console.log(formProduct);
 
     try {
       const response = await fetch('https://excited-evanescent-macaroni.glitch.me/api/goods', {
@@ -113,10 +132,6 @@ export const formSubmit = async () => {
       if (response.status === 200 || response.status === 201) {
         const serverResponse = await response.json();
         console.log('Ответ от сервера:', serverResponse);
-
-        // const goods = await loadGoods();
-        // clearGoods();
-        // await renderGoods(goods);
 
         const newRow = await createRow(serverResponse);
         const tableBody = document.querySelector('.thead-crm');

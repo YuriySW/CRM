@@ -13,6 +13,8 @@ export let formModal,
   overlayErrorShow,
   popup,
   formInputPrice,
+  preview,
+  file,
   popupTitle;
 
 const showModal = async () => {
@@ -85,9 +87,14 @@ const showModal = async () => {
               />
               <label class="form__add-img" for="file">Добавить изображение</label>
               <input id="file" type="file" name="file" style="display: none" />
+              
             </div>
+              <div class="wrapper-preview">
+          <img class="preview">
+          </div>
           </fieldset>
           <button class="form__submit form__submit_add-from" type="submit">Добавить товар</button>
+        
           <p class="total-amount">
             Итоговая стоимость:
             <span class="amount-money amount-money_add-from">$ 900</span>
@@ -115,6 +122,43 @@ const showModal = async () => {
   popup = document.querySelector('.popup');
   popupTitle = document.querySelector('.popup__title_modal');
   formInputPrice = document.querySelector('.form__input_price');
+
+  // preview = document.querySelector('.preview');
+  // const formAddImgButton = document.querySelector('.form__add-img');
+  // file = document.querySelector('#file');
+  // preview.style.marginBottom = '20px';
+
+  // file.addEventListener('change', () => {
+  //   const maxFileSize = 1048576; // 1MB в байтах
+  //   const fileInput = document.querySelector('#file');
+  //   const preview = document.querySelector('.preview');
+
+  //   if (fileInput.files.length > 0) {
+  //     const file = fileInput.files[0];
+
+  //     if (file.size > maxFileSize) {
+  //       alert('Файл слишком большой. Максимальный размер файла: 1MB.');
+  //       fileInput.value = ''; // Очищаем выбранный файл
+  //       preview.style.display = 'none'; // Скрываем превью
+  //     } else {
+  //       const src = URL.createObjectURL(file);
+  //       preview.src = src;
+  //       formAddImgButton.style.marginBottom = '10px';
+  //       preview.style.display = 'block'; // Показываем превью
+  //       // Устанавливаем стили для изменения грид-сетки
+  //       const parent = preview.parentElement;
+  //       parent.style.gridColumn = 'span 2'; // Занять 2 колонки
+  //       parent.style.gridRow = 'span 1'; // Занять 1 строку, можно изменить, если нужно больше
+
+  //       // Дополнительные стили для изображения
+  //       preview.style.width = '100%'; // Изображение займет 100% ширины родителя
+  //       preview.style.height = 'auto'; // Высота будет авто, чтобы сохранить пропорции
+  //       preview.style.objectFit = 'contain'; // Масштабируем изображение, сохраняя пропорции
+  //       preview.style.margin = '0 auto'; // Центрируем изображение
+  //       preview.style.display = 'block';
+  //     }
+  //   }
+  // });
 };
 
 export {showModal};

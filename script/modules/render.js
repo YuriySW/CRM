@@ -9,6 +9,8 @@ import {
   popupTitle,
   formInputPrice,
   productAddTable,
+  preview,
+  file,
 } from './modal.js';
 import {getGoodById, updateGood} from './api.js';
 import {closeModal, discountRebate, closeError} from './control.js';
@@ -41,7 +43,6 @@ export const totalCoast = () => {
     totalSum += +row.textContent.slice(1);
   });
   amountMoneyCms.textContent = `$${Math.round(totalSum)}`;
-  console.log((amountMoneyCms.textContent = `$${Math.round(totalSum)}`));
 
   return totalSum;
 };
@@ -171,6 +172,7 @@ const handleEditButtonClick = async (e) => {
 
   const good = await getGoodById(goodId);
   console.log(goodId, good);
+  console.log(good.image);
 
   await showModal();
 
@@ -190,6 +192,81 @@ const handleEditButtonClick = async (e) => {
     discountState.isDiscountAlreadyApplied = false;
   }
 
+  const preview = document.querySelector('.preview');
+  const formAddImgButton = document.querySelector('.form__add-img');
+  // const src = URL.createObjectURL(file);
+  const src = `https://excited-evanescent-macaroni.glitch.me/image/${goodId}.jpg`;
+
+  preview.src = src;
+
+
+  preview.onload = () => {
+   
+    formAddImgButton.style.marginBottom = '10px';
+    preview.style.display = 'block';
+
+    const parent = preview.parentElement;
+    parent.style.gridColumn = 'span 2';
+    parent.style.gridRow = 'span 1';
+    parent.style.position = 'relative';
+
+
+    const gradientOverlay = document.createElement('div');
+    gradientOverlay.style.position = 'absolute';
+    gradientOverlay.style.top = '0';
+    gradientOverlay.style.left = '0';
+    gradientOverlay.style.width = '100%';
+    gradientOverlay.style.height = '100%';
+    gradientOverlay.style.background =
+      'linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))';
+    gradientOverlay.style.pointerEvents = 'none';
+
+ 
+    parent.appendChild(gradientOverlay);
+
+
+    const overlay = document.createElement('div');
+    overlay.style.position = 'absolute';
+    overlay.style.width = '40px';
+    overlay.style.height = '40px';
+    overlay.style.top = '50%';
+    overlay.style.left = '50%';
+    overlay.style.transform = 'translate(-50%, -50%)';
+    overlay.style.cursor = 'pointer';
+
+
+    overlay.innerHTML = `
+    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M23.5334 17.45L20 20.9833L16.45 17.45L14.1 19.8L17.65 23.3333L14.1167 26.8667L16.4667 29.2167L20 25.6833L23.5334 29.2167L25.8834 26.8667L22.35 23.3333L25.8834 19.8L23.5334 17.45ZM25.8334 6.66667L24.1667 5H15.8334L14.1667 6.66667H8.33337V10H31.6667V6.66667H25.8334ZM10 31.6667C10 33.5 11.5 35 13.3334 35H26.6667C28.5 35 30 33.5 30 31.6667V11.6667H10V31.6667ZM13.3334 15H26.6667V31.6667H13.3334V15Z" fill="white"/>
+    </svg>
+  `;
+
+ 
+    parent.appendChild(overlay);
+
+    
+    overlay.addEventListener('click', async () => {
+      console.log('SVG clicked!');
+      preview.src = ''; 
+      preview.style.display = 'none'; 
+
+      parent.removeChild(overlay);
+      parent.removeChild(gradientOverlay); /
+
+      previewFunc();
+    });
+  };
+
+ 
+  preview.onerror = () => {
+   
+    preview.style.display = 'none';
+    formAddImgButton.style.marginBottom = '0';
+    previewFunc();
+  };
+
+ 
+
   discountRebateEdit();
   calculateTotalEdit();
 
@@ -202,6 +279,25 @@ const handleEditButtonClick = async (e) => {
     async (e) => {
       e.preventDefault();
 
+      const fileInput = document.querySelector('#file');
+      let base64Image = '';
+      if (fileInput.files.length > 0) {
+        const file = fileInput.files[0];
+        const reader = new FileReader();
+
+        base64Image = await new Promise((resolve, reject) => {
+          reader.onloadend = function () {
+            resolve(reader.result);
+          };
+          reader.onerror = reject;
+          reader.readAsDataURL(file);
+        });
+      }
+
+      // if (fileInput.files.length === 0) {
+      //   base64Image = ''; // Явно отправляем пустое изображение
+      // }
+
       const updatedGood = {
         title: formModal.querySelector('#name').value,
         category: formModal.querySelector('#category').value,
@@ -210,6 +306,7 @@ const handleEditButtonClick = async (e) => {
         description: formModal.querySelector('#description').value,
         count: formModal.querySelector('#count').value,
         price: formModal.querySelector('#price').value,
+        image: base64Image,
       };
 
       await updateGood(goodId, updatedGood);
@@ -235,4 +332,61 @@ const handleEditButtonClick = async (e) => {
     },
     {once: true}
   );
+};
+
+export const previewFunc = () => {
+  const preview = document.querySelector('.preview');
+  const formAddImgButton = document.querySelector('.form__add-img');
+  const file = document.querySelector('#file');
+  preview.style.marginBottom = '20px';
+  const warningMessage = document.createElement('h2');
+
+  file.addEventListener('change', () => {
+    const maxFileSize = 1048576;
+    const fileInput = document.querySelector('#file');
+    const preview = document.querySelector('.preview');
+
+    if (fileInput.files.length > 0) {
+      const file = fileInput.files[0];
+
+      if (file.size > maxFileSize) {
+        warningMessage.style.display = 'block';
+        const formOptionalInput = document.querySelector('.form__optional-input');
+
+        warningMessage.textContent = 'Изображение не должно превышать размер 1 Мб';
+
+        warningMessage.style.fontStyle = 'normal';
+        warningMessage.style.fontWeight = '700';
+        warningMessage.style.fontSize = '14px';
+        warningMessage.style.lineHeight = '17px';
+        warningMessage.style.textAlign = 'center';
+        warningMessage.style.letterSpacing = '0.1em';
+        warningMessage.style.textTransform = 'uppercase';
+        warningMessage.style.paddingTop = '20px';
+
+        warningMessage.style.color = '#D80101';
+
+        formOptionalInput.parentNode.insertBefore(warningMessage, formOptionalInput.nextSibling);
+
+        fileInput.value = '';
+        preview.style.display = 'none';
+      } else {
+        warningMessage.style.display = 'none';
+        const src = URL.createObjectURL(file);
+        preview.src = src;
+        formAddImgButton.style.marginBottom = '10px';
+        preview.style.display = 'block';
+
+        const parent = preview.parentElement;
+        parent.style.gridColumn = 'span 2';
+        parent.style.gridRow = 'span 1';
+
+        preview.style.width = '100%';
+        preview.style.height = 'auto';
+        preview.style.objectFit = 'contain';
+        preview.style.margin = '0 auto';
+        preview.style.display = 'block';
+      }
+    }
+  });
 };

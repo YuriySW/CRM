@@ -99,10 +99,7 @@ export const createRow = async ({id, title, category, units, count, price}) => {
 </tr>`;
 
   const button = trElement.querySelector(`.${buttonImg}`);
-  button.setAttribute(
-    'data-pic',
-    'https://images.wallpaperscraft.ru/image/single/dvoichnyj_kod_kod_tsifry_147523_1280x720.jpg'
-  );
+  button.setAttribute('data-pic', `https://excited-evanescent-macaroni.glitch.me/image/${id}.jpg`);
 
   button.addEventListener('click', () => {
     const url = button.getAttribute('data-pic');
