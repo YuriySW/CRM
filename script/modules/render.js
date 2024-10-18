@@ -199,9 +199,7 @@ const handleEditButtonClick = async (e) => {
 
   preview.src = src;
 
-
   preview.onload = () => {
-   
     formAddImgButton.style.marginBottom = '10px';
     preview.style.display = 'block';
 
@@ -209,7 +207,6 @@ const handleEditButtonClick = async (e) => {
     parent.style.gridColumn = 'span 2';
     parent.style.gridRow = 'span 1';
     parent.style.position = 'relative';
-
 
     const gradientOverlay = document.createElement('div');
     gradientOverlay.style.position = 'absolute';
@@ -221,9 +218,7 @@ const handleEditButtonClick = async (e) => {
       'linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))';
     gradientOverlay.style.pointerEvents = 'none';
 
- 
     parent.appendChild(gradientOverlay);
-
 
     const overlay = document.createElement('div');
     overlay.style.position = 'absolute';
@@ -234,38 +229,31 @@ const handleEditButtonClick = async (e) => {
     overlay.style.transform = 'translate(-50%, -50%)';
     overlay.style.cursor = 'pointer';
 
-
     overlay.innerHTML = `
     <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M23.5334 17.45L20 20.9833L16.45 17.45L14.1 19.8L17.65 23.3333L14.1167 26.8667L16.4667 29.2167L20 25.6833L23.5334 29.2167L25.8834 26.8667L22.35 23.3333L25.8834 19.8L23.5334 17.45ZM25.8334 6.66667L24.1667 5H15.8334L14.1667 6.66667H8.33337V10H31.6667V6.66667H25.8334ZM10 31.6667C10 33.5 11.5 35 13.3334 35H26.6667C28.5 35 30 33.5 30 31.6667V11.6667H10V31.6667ZM13.3334 15H26.6667V31.6667H13.3334V15Z" fill="white"/>
     </svg>
   `;
 
- 
     parent.appendChild(overlay);
 
-    
     overlay.addEventListener('click', async () => {
       console.log('SVG clicked!');
-      preview.src = ''; 
-      preview.style.display = 'none'; 
+      preview.src = '';
+      preview.style.display = 'none';
 
       parent.removeChild(overlay);
-      parent.removeChild(gradientOverlay); /
+      parent.removeChild(gradientOverlay);
 
       previewFunc();
     });
   };
 
- 
   preview.onerror = () => {
-   
     preview.style.display = 'none';
     formAddImgButton.style.marginBottom = '0';
     previewFunc();
   };
-
- 
 
   discountRebateEdit();
   calculateTotalEdit();
