@@ -281,10 +281,6 @@ const handleEditButtonClick = async (e) => {
         });
       }
 
-      // if (fileInput.files.length === 0) {
-      //   base64Image = ''; // Явно отправляем пустое изображение
-      // }
-
       const updatedGood = {
         title: formModal.querySelector('#name').value,
         category: formModal.querySelector('#category').value,
