@@ -101,7 +101,8 @@ export const createRow = async ({id, title, category, units, count, price}) => {
   const button = trElement.querySelector(`.${buttonImg}`);
   // button.setAttribute('data-pic', `https://excited-evanescent-macaroni.glitch.me/${good.image}`);
 
-  button.addEventListener('click', () => {
+  button.addEventListener('click', async () => {
+    const good = await getGoodById(id);
     button.setAttribute('data-pic', `https://excited-evanescent-macaroni.glitch.me/${good.image}`);
     const url = button.getAttribute('data-pic');
 
