@@ -99,9 +99,10 @@ export const createRow = async ({id, title, category, units, count, price}) => {
 </tr>`;
 
   const button = trElement.querySelector(`.${buttonImg}`);
-  button.setAttribute('data-pic', `https://excited-evanescent-macaroni.glitch.me/${good.image}`);
+  // button.setAttribute('data-pic', `https://excited-evanescent-macaroni.glitch.me/${good.image}`);
 
   button.addEventListener('click', () => {
+    button.setAttribute('data-pic', `https://excited-evanescent-macaroni.glitch.me/${good.image}`);
     const url = button.getAttribute('data-pic');
 
     const width = 600;
