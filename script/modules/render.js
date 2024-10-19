@@ -195,8 +195,7 @@ const handleEditButtonClick = async (e) => {
   const preview = document.querySelector('.preview');
   const formAddImgButton = document.querySelector('.form__add-img');
   // const src = URL.createObjectURL(file);
-  const src = `https://excited-evanescent-macaroni.glitch.me/image/${goodId}.jpg`;
-
+  const src = `https://excited-evanescent-macaroni.glitch.me/${good.image}`;
   preview.src = src;
 
   preview.onload = () => {

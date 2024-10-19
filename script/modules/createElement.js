@@ -99,7 +99,7 @@ export const createRow = async ({id, title, category, units, count, price}) => {
 </tr>`;
 
   const button = trElement.querySelector(`.${buttonImg}`);
-  button.setAttribute('data-pic', `https://excited-evanescent-macaroni.glitch.me/image/${id}.jpg`);
+  button.setAttribute('data-pic', `https://excited-evanescent-macaroni.glitch.me/${good.image}`);
 
   button.addEventListener('click', () => {
     const url = button.getAttribute('data-pic');
@@ -110,11 +110,12 @@ export const createRow = async ({id, title, category, units, count, price}) => {
     const screenWidth = window.screen.width;
     const screenHeight = window.screen.height;
 
-    const left = screenWidth / 2 - width / 2;
-    const top = screenHeight / 2 - height / 2;
+    const left = Math.round(screenWidth / 2 - width / 2);
+    const top = Math.round(screenHeight / 2 - height / 2);
 
     window.open(url, '', `width=${width},height=${height},top=${top},left=${left}`);
   });
+
   setTimeout(() => {
     editFunc();
   }, 1);
