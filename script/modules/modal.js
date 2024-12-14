@@ -73,6 +73,7 @@ const showModal = async () => {
                 name="description"
                 id="description"
                 rows="5"
+                 minlength="80"
                 required
               ></textarea>
               <label class="form__label" for="count">Колличество</label>
@@ -123,42 +124,31 @@ const showModal = async () => {
   popupTitle = document.querySelector('.popup__title_modal');
   formInputPrice = document.querySelector('.form__input_price');
 
-  // preview = document.querySelector('.preview');
-  // const formAddImgButton = document.querySelector('.form__add-img');
-  // file = document.querySelector('#file');
-  // preview.style.marginBottom = '20px';
+  const nameInput = document.getElementById('name');
+  const categoryInput = document.getElementById('category');
+  const unitsInput = document.getElementById('units');
+  const discountInput = document.getElementById('discount');
+  const countInput = document.getElementById('count');
+  const priceInput = document.getElementById('price');
 
-  // file.addEventListener('change', () => {
-  //   const maxFileSize = 1048576; // 1MB в байтах
-  //   const fileInput = document.querySelector('#file');
-  //   const preview = document.querySelector('.preview');
+  const cyrillicSpaces = (event) => {
+    event.target.value = event.target.value.replace(/[^а-яёА-ЯЁ\s]/g, '');
+  };
 
-  //   if (fileInput.files.length > 0) {
-  //     const file = fileInput.files[0];
+  const cyrillicOnly = (event) => {
+    event.target.value = event.target.value.replace(/[^а-яёА-ЯЁ]/g, '');
+  };
 
-  //     if (file.size > maxFileSize) {
-  //       alert('Файл слишком большой. Максимальный размер файла: 1MB.');
-  //       fileInput.value = ''; // Очищаем выбранный файл
-  //       preview.style.display = 'none'; // Скрываем превью
-  //     } else {
-  //       const src = URL.createObjectURL(file);
-  //       preview.src = src;
-  //       formAddImgButton.style.marginBottom = '10px';
-  //       preview.style.display = 'block'; // Показываем превью
-  //       // Устанавливаем стили для изменения грид-сетки
-  //       const parent = preview.parentElement;
-  //       parent.style.gridColumn = 'span 2'; // Занять 2 колонки
-  //       parent.style.gridRow = 'span 1'; // Занять 1 строку, можно изменить, если нужно больше
+  const numbersOnly = (event) => {
+    event.target.value = event.target.value.replace(/[^0-9]/g, '');
+  };
 
-  //       // Дополнительные стили для изображения
-  //       preview.style.width = '100%'; // Изображение займет 100% ширины родителя
-  //       preview.style.height = 'auto'; // Высота будет авто, чтобы сохранить пропорции
-  //       preview.style.objectFit = 'contain'; // Масштабируем изображение, сохраняя пропорции
-  //       preview.style.margin = '0 auto'; // Центрируем изображение
-  //       preview.style.display = 'block';
-  //     }
-  //   }
-  // });
+  nameInput.addEventListener('input', cyrillicSpaces);
+  categoryInput.addEventListener('input', cyrillicSpaces);
+  unitsInput.addEventListener('input', cyrillicOnly);
+  discountInput.addEventListener('input', numbersOnly);
+  countInput.addEventListener('input', numbersOnly);
+  priceInput.addEventListener('input', numbersOnly);
 };
 
 export {showModal};
