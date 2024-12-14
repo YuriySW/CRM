@@ -130,6 +130,7 @@ const showModal = async () => {
   const discountInput = document.getElementById('discount');
   const countInput = document.getElementById('count');
   const priceInput = document.getElementById('price');
+  const descriptionInput = document.getElementById('description');
 
   const cyrillicSpaces = (event) => {
     event.target.value = event.target.value.replace(/[^а-яёА-ЯЁ\s]/g, '');
@@ -145,6 +146,7 @@ const showModal = async () => {
 
   nameInput.addEventListener('input', cyrillicSpaces);
   categoryInput.addEventListener('input', cyrillicSpaces);
+  descriptionInput.addEventListener('input', cyrillicSpaces);
   unitsInput.addEventListener('input', cyrillicOnly);
   discountInput.addEventListener('input', numbersOnly);
   countInput.addEventListener('input', numbersOnly);
