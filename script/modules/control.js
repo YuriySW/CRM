@@ -6,7 +6,7 @@ import {
   editFunc,
   discountState,
 } from './render.js';
-import {loadGoods, deleteGood} from './api.js';
+import {loadGoods, deleteGood, searchGood} from './api.js';
 import {
   overlayShow,
   overlayErrorShow,
@@ -23,24 +23,80 @@ import {
 import {createRow} from './createElement.js';
 import {editButton} from './identifier.js';
 
-export const deleteTr = async (e) => {
+//
+export const deleteTr = (e) => {
   const target = e.target;
 
   if (target.closest('.button-basket')) {
     const prodElement = target.closest('.product-tr');
-    prodElement.remove();
     const deletedId = prodElement.querySelector('.thead-crm__item').textContent.trim();
 
-    try {
-      await deleteGood(deletedId);
-      await loadGoods();
-    } catch (error) {
-      console.log(error);
-    }
+    const modal = document.getElementById('delete-modal');
+    const modalContent = modal.querySelector('.modal-content');
 
-    totalCoast();
+    modal.style.display = 'flex';
+
+    const confirmButton = document.getElementById('confirm-delete');
+    const cancelButton = document.getElementById('cancel-delete');
+
+    const confirmHandler = async () => {
+      try {
+        prodElement.remove();
+        await deleteGood(deletedId);
+        await loadGoods();
+        totalCoast();
+      } catch (error) {
+        console.error('Ошибка при удалении товара:', error);
+      } finally {
+        modal.style.display = 'none';
+        cleanupHandlers();
+      }
+    };
+
+    const cancelHandler = () => {
+      modal.style.display = 'none';
+      cleanupHandlers();
+    };
+
+    const outsideClickHandler = (event) => {
+      if (!modalContent.contains(event.target)) {
+        modal.style.display = 'none';
+        cleanupHandlers();
+      }
+    };
+
+    const cleanupHandlers = () => {
+      confirmButton.removeEventListener('click', confirmHandler);
+      cancelButton.removeEventListener('click', cancelHandler);
+      modal.removeEventListener('click', outsideClickHandler);
+    };
+
+    confirmButton.addEventListener('click', confirmHandler);
+    cancelButton.addEventListener('click', cancelHandler);
+    modal.addEventListener('click', outsideClickHandler);
   }
 };
+
+//
+
+// export const deleteTr = async (e) => {
+//   const target = e.target;
+
+//   if (target.closest('.button-basket')) {
+//     const prodElement = target.closest('.product-tr');
+//     prodElement.remove();
+//     const deletedId = prodElement.querySelector('.thead-crm__item').textContent.trim();
+
+//     try {
+//       await deleteGood(deletedId);
+//       await loadGoods();
+//     } catch (error) {
+//       console.log(error);
+//     }
+
+//     totalCoast();
+//   }
+// };
 
 export const closeModal = () => {
   overlay.addEventListener('click', (e) => {
@@ -166,3 +222,29 @@ export const clearTr = () => {
     }
   });
 };
+
+const handleSearchWithDebounce = (() => {
+  let debounceTimeout;
+
+  return async (event) => {
+    const searchQuery = event.target.value;
+
+    clearTimeout(debounceTimeout);
+
+    debounceTimeout = setTimeout(async () => {
+      try {
+        const goods = await searchGood(searchQuery);
+
+        const table = document.querySelector('.table-crm');
+        const rows = table.querySelectorAll('tr:not(:first-child)');
+        rows.forEach((row) => row.remove());
+
+        await renderGoods(goods);
+      } catch (error) {
+        console.error('Error fetching goods:', error);
+      }
+    }, 300);
+  };
+})();
+
+document.querySelector('.search-input').addEventListener('input', handleSearchWithDebounce);

@@ -24,6 +24,12 @@ export const clearGoods = () => {
 
 export const renderGoods = async (arr) => {
   try {
+    //
+    const table = document.querySelector('.table-crm');
+    const rowss = table.querySelectorAll('tr:not(:first-child)');
+    rowss.forEach((row) => row.remove());
+    //
+
     const rows = await Promise.all(arr.map(createRow));
 
     rows.forEach((trElement) => thead.append(trElement));
@@ -74,36 +80,111 @@ const fillFormWithGoodData = (good) => {
   overlayShow.style.display = 'block';
 };
 
+// export const calculateTotalEdit = () => {
+//   const priceInput = formModal.querySelector('#price');
+//   const countProduct = formModal.querySelector('#count');
+//   const discountValue = +discount.value || 0;
+
+//   if (priceInput.value && countProduct.value) {
+//     const originalPrice = +priceInput.value;
+//     const count = +countProduct.value;
+
+//     let totalPrice = originalPrice * count;
+
+//     if (discountValue) {
+//       const discountAmount = (originalPrice * discountValue) / 100;
+//       totalPrice = (originalPrice - discountAmount) * count;
+//     }
+
+//     amountMoneyAddFrom.textContent = `$ ${Math.round(totalPrice)}`;
+//   }
+
+//   priceInput.addEventListener('input', () => {
+//     discountState.isDiscountAlreadyApplied = false;
+//     calculateTotalEdit();
+//   });
+
+//   countProduct.addEventListener('input', calculateTotalEdit);
+
+//   discount.addEventListener('input', () => {
+//     discountState.isDiscountAlreadyApplied = false;
+//     calculateTotalEdit();
+//   });
+// };
+
+// export const calculateTotal = () => {
+//   const priceInput = formModal.querySelector('#price');
+//   const countProduct = formModal.querySelector('#count');
+
+//   if (priceInput.value && countProduct.value) {
+//     let originalPrice = +priceInput.value;
+//     let total = originalPrice * countProduct.value;
+
+//     if (+discount.value && !discountState.isDiscountAlreadyApplied) {
+//       const discountValue = (originalPrice * +discount.value) / 100;
+//       const discountedPrice = originalPrice - discountValue;
+//       total = discountedPrice * countProduct.value;
+
+//       discountState.isDiscountAlreadyApplied = true;
+//     }
+
+//     amountMoneyAddFrom.textContent = `$ ${Math.round(total)}`;
+//   }
+
+//   priceInput.addEventListener('input', () => {
+//     discountState.isDiscountAlreadyApplied = false;
+//     calculateTotal();
+//   });
+
+//   countProduct.addEventListener('input', calculateTotal);
+
+//   discount.addEventListener('input', () => {
+//     discountState.isDiscountAlreadyApplied = false;
+//     calculateTotal();
+//   });
+// };
+
+//тест
+const calculatePrice = (price, count, discount) => {
+  const originalPrice = +price;
+  const countValue = +count;
+  const discountValue = +discount || 0;
+
+  let totalPrice = originalPrice * countValue;
+
+  if (discountValue) {
+    const discountAmount = (originalPrice * discountValue) / 100;
+    totalPrice = (originalPrice - discountAmount) * countValue;
+  }
+
+  return Math.round(totalPrice);
+};
+
+const addInputListeners = (priceInput, countProduct, discountInput, calculateFn) => {
+  priceInput.addEventListener('input', () => {
+    discountState.isDiscountAlreadyApplied = false;
+    calculateFn();
+  });
+
+  countProduct.addEventListener('input', calculateFn);
+
+  discountInput.addEventListener('input', () => {
+    discountState.isDiscountAlreadyApplied = false;
+    calculateFn();
+  });
+};
+
 export const calculateTotalEdit = () => {
   const priceInput = formModal.querySelector('#price');
   const countProduct = formModal.querySelector('#count');
-  const discountValue = +discount.value || 0;
+  const discountValue = discount.value || 0;
 
   if (priceInput.value && countProduct.value) {
-    const originalPrice = +priceInput.value;
-    const count = +countProduct.value;
-
-    let totalPrice = originalPrice * count;
-
-    if (discountValue) {
-      const discountAmount = (originalPrice * discountValue) / 100;
-      totalPrice = (originalPrice - discountAmount) * count;
-    }
-
-    amountMoneyAddFrom.textContent = `$ ${Math.round(totalPrice)}`;
+    const totalPrice = calculatePrice(priceInput.value, countProduct.value, discountValue);
+    amountMoneyAddFrom.textContent = `$ ${totalPrice}`;
   }
 
-  priceInput.addEventListener('input', () => {
-    discountState.isDiscountAlreadyApplied = false;
-    calculateTotalEdit();
-  });
-
-  countProduct.addEventListener('input', calculateTotalEdit);
-
-  discount.addEventListener('input', () => {
-    discountState.isDiscountAlreadyApplied = false;
-    calculateTotalEdit();
-  });
+  addInputListeners(priceInput, countProduct, discount, calculateTotalEdit);
 };
 
 export const calculateTotal = () => {
@@ -111,32 +192,19 @@ export const calculateTotal = () => {
   const countProduct = formModal.querySelector('#count');
 
   if (priceInput.value && countProduct.value) {
-    let originalPrice = +priceInput.value;
-    let total = originalPrice * countProduct.value;
+    let total = calculatePrice(priceInput.value, countProduct.value, discount.value);
 
     if (+discount.value && !discountState.isDiscountAlreadyApplied) {
-      const discountValue = (originalPrice * +discount.value) / 100;
-      const discountedPrice = originalPrice - discountValue;
-      total = discountedPrice * countProduct.value;
-
       discountState.isDiscountAlreadyApplied = true;
     }
 
-    amountMoneyAddFrom.textContent = `$ ${Math.round(total)}`;
+    amountMoneyAddFrom.textContent = `$ ${total}`;
   }
 
-  priceInput.addEventListener('input', () => {
-    discountState.isDiscountAlreadyApplied = false;
-    calculateTotal();
-  });
-
-  countProduct.addEventListener('input', calculateTotal);
-
-  discount.addEventListener('input', () => {
-    discountState.isDiscountAlreadyApplied = false;
-    calculateTotal();
-  });
+  addInputListeners(priceInput, countProduct, discount, calculateTotal);
 };
+
+//тест
 
 export const discountRebateEdit = () => {
   checkboxDiscount.addEventListener('change', (e) => {
@@ -255,6 +323,7 @@ const handleEditButtonClick = async (e) => {
   };
 
   discountRebateEdit();
+
   calculateTotalEdit();
 
   closeModal();

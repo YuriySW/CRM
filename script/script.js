@@ -18,6 +18,7 @@ const init = async () => {
     discountState.isDiscountAlreadyApplied = false;
     previewFunc();
     calculateTotal();
+
     closeModal();
     closeError();
     discountRebate();

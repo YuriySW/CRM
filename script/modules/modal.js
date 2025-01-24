@@ -1,4 +1,5 @@
 import loadStyle from './loadStyle.js';
+import {category} from './api.js';
 
 export let formModal,
   checkboxDiscount,
@@ -19,6 +20,7 @@ export let formModal,
 
 const showModal = async () => {
   await loadStyle('css/index.css');
+  populateCategoryList();
 
   const modal = `
     <div class="overlay overlay_show">
@@ -44,8 +46,14 @@ const showModal = async () => {
             <div class="form__item-name">
               <label class="form__label" for="name">Наименования</label>
               <input class="form__input" type="text" name="name" id="name" required />
+
               <label class="form__label" for="category">Категория</label>
-              <input class="form__input" type="text" name="category" id="category" required />
+              <input class="form__input" type="text" name="category" id="category" list="category-list" required />
+              <datalist id="category-list">
+               <option value="Мобильный телефон"></option>
+  
+              </datalist>
+
               <label class="form__label" for="units">Единицы измерения</label>
               <input class="form__input" type="text" name="units" id="units" required />
               <label class="form__label" for="discount">Дисконт</label>
@@ -151,6 +159,24 @@ const showModal = async () => {
   discountInput.addEventListener('input', numbersOnly);
   countInput.addEventListener('input', numbersOnly);
   priceInput.addEventListener('input', numbersOnly);
+  // populateCategoryList();
+};
+
+export const populateCategoryList = async () => {
+  try {
+    const categories = await category();
+    const datalist = document.getElementById('category-list');
+
+    datalist.innerHTML = '';
+
+    categories.forEach((cat) => {
+      const option = document.createElement('option');
+      option.value = cat;
+      datalist.appendChild(option);
+    });
+  } catch (error) {
+    console.error('Ошибка при загрузке категорий:', error);
+  }
 };
 
 export {showModal};

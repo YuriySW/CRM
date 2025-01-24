@@ -1,4 +1,5 @@
 import {overlayShow} from './modal.js';
+import {renderGoods} from './render.js';
 
 export const loadGoods = async (page = 1) => {
   try {
@@ -95,5 +96,55 @@ export const getGoodById = async (id) => {
     return good;
   } catch (error) {
     console.error('Error:', error);
+  }
+};
+
+export const searchGood = async (searchQuery, page = 1) => {
+  try {
+    const url = `https://excited-evanescent-macaroni.glitch.me/api/goods?page=${page}&search=${encodeURIComponent(
+      searchQuery
+    )}`;
+
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    const data = await response.json();
+
+    return data.goods;
+  } catch (error) {
+    console.error('Error:', error);
+    throw error;
+  }
+};
+
+export const category = async () => {
+  try {
+    const url = `https://excited-evanescent-macaroni.glitch.me/api/categories`;
+
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    const data = await response.json();
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.error('Error:', error);
+    throw error;
   }
 };

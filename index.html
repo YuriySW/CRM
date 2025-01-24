@@ -10,6 +10,14 @@
     <script type="module" src="script/script.js"></script>
   </head>
   <body class="body">
+    <div id="delete-modal" class="modal delete-hidden">
+      <div class="modal-content">
+        <p>Вы действительно хотите удалить товар?</p>
+        <button id="confirm-delete" class="modal-btn confirm">Да</button>
+        <button id="cancel-delete" class="modal-btn cancel">Отмена</button>
+      </div>
+    </div>
+
     <div class="popup container">
       <div class="title-wrap">
         <h1 class="popup__title popup__title_cms">CMS</h1>
@@ -961,6 +969,7 @@
         </div>
       </div>
     </div>
+
     <!-- <div class="overlay overlay_show">
       <div class="overlay-error overlay-error-show">
         <button class="popup-close popup-close-error" type="button">
