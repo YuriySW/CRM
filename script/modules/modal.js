@@ -20,7 +20,6 @@ export let formModal,
 
 const showModal = async () => {
   await loadStyle('css/index.css');
-  populateCategoryList();
 
   const modal = `
     <div class="overlay overlay_show">
@@ -48,9 +47,13 @@ const showModal = async () => {
               <input class="form__input" type="text" name="name" id="name" required />
 
               <label class="form__label" for="category">Категория</label>
-              <input class="form__input" type="text" name="category" id="category" list="category-list" required />
+              <input class="form__input" type="text" name="category" id="category" list="category-list"  required />
               <datalist id="category-list">
                <option value="Мобильный телефон"></option>
+               <option value="Игрушки"></option>
+               <option value="ТВ приставка"></option>
+               <option value="Кабеля"></option>
+               <option value="Умный дом"></option>
   
               </datalist>
 
@@ -159,7 +162,12 @@ const showModal = async () => {
   discountInput.addEventListener('input', numbersOnly);
   countInput.addEventListener('input', numbersOnly);
   priceInput.addEventListener('input', numbersOnly);
-  // populateCategoryList();
+
+  categoryInput.addEventListener('focus', () => {
+    categoryInput.value = '';
+  });
+
+  await populateCategoryList();
 };
 
 export const populateCategoryList = async () => {

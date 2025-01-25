@@ -11,6 +11,7 @@ import {
   productAddTable,
   preview,
   file,
+  populateCategoryList,
 } from './modal.js';
 import {getGoodById, updateGood} from './api.js';
 import {closeModal, discountRebate, closeError} from './control.js';
@@ -59,6 +60,7 @@ export const discountState = {
 
 const fillFormWithGoodData = (good) => {
   const formModal = document.querySelector('.popup__form');
+
   formModal.querySelector('#name').value = good.title;
   formModal.querySelector('#category').value = good.category;
   formModal.querySelector('#units').value = good.units;
