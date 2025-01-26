@@ -26,3 +26,12 @@ svg:focus rect {
   transition: 0.4s;
   fill: #351db8;
 }
+
+.not-img {
+  cursor: not-allowed;
+  z-index: 10;
+}
+
+.not-img:hover path {
+  fill: #351db8;
+}
