@@ -35,12 +35,30 @@
 }
 
 .modal-btn.confirm {
-  background-color: #6d5bd0;
-  color: #fff;
+  background-color: #fff;
+  color: #6d5bd0;
+  border: 1px solid #6d5bd0;
+  min-width: 100px;
+  margin: 0;
 }
 
 .modal-btn.cancel {
   background-color: #fff;
   color: #6d5bd0;
   border: 1px solid #6d5bd0;
+  margin: 0;
+}
+
+.modal-btn.cancel:hover,
+.modal-btn.confirm:hover {
+  background-color: #6d5bd0;
+  color: #fff;
+  transition: 0.4s;
+}
+
+.modal-btn.cancel:active,
+.modal-btn.confirm:active {
+  background-color: #462dd1;
+  color: #fff;
+  transition: 0.4s;
 }
