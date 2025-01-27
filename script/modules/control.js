@@ -5,6 +5,7 @@ import {
   clearGoods,
   editFunc,
   discountState,
+  previewFunc,
 } from './render.js';
 import {loadGoods, deleteGood, searchGood} from './api.js';
 import {
@@ -139,6 +140,7 @@ export const formSubmit = async () => {
 
     const formData = new FormData(e.target);
     const fileInput = document.querySelector('#file');
+
     let priceValue = parseFloat(formData.get('price'));
 
     if (checkboxDiscount.checked && discount.value) {

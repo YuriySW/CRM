@@ -13,12 +13,10 @@ import {showModal, overlayShow, preview, file} from './modules/modal.js';
 const init = async () => {
   addProductBtn.addEventListener('click', async () => {
     await showModal();
-
     overlayShow.style.display = 'block';
     discountState.isDiscountAlreadyApplied = false;
     previewFunc();
     calculateTotal();
-
     closeModal();
     closeError();
     discountRebate();
@@ -27,9 +25,7 @@ const init = async () => {
 
   clearTr();
   const goods = await loadGoods();
-
   await renderGoods(goods);
-  // editFunc();
 
   setupDeleteTrHandler();
 };
